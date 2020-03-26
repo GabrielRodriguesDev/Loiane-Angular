@@ -1,6 +1,6 @@
 <section class="property-binding">
 
-    <article>
+   <!-- <article>
       <h3>Interpolation / Interpolação</h3>
       <p>String renderizada com interpolation {{ url }}</p>
       <p>Resultado de 1 + 1 é {{ 1 + 1 }}</p>
@@ -9,9 +9,49 @@
   
     <article>
       <h3>Property Binding</h3>
-      <img src="{{ urlImg }}" />
-      <img [src]="urlImg" />
+      <img src="{{ urlImg }}" /> //Interpolation
+      <img [src]="urlImg" /> //Property-Binding
       
+      <p>Os dois tem o mesmo resultado, apenas sua aplicação se divere. Portanto
+          os dois podem ser usados
+      </p>
+    </article> -->
+    <article>
+        <h3>Class & Style Binding</h3>
+        <div>Selecione uma classe
+          <select #classe (change)="0">
+            <option value="alert-success">Sucesso</option>
+            <option value="alert-info">Info</option>
+            <option value="alert-warning">Alerta</option>
+            <option value="alert-danger">Erro</option>
+          </select>
+          <br> <br>
+
+
+          //Como utilizar o Class Binding
+          <div class="alert {{classe.value}}" role="alert">
+            Texto colorido conforme o valor combox.
+          </div>
+
+          <div class="alert" role="alert" 
+          [class.alert-success]="classe.value == 'alert-success'">Sucess</div>
+
+          <div class="alert" role="alert"
+           [class.alert-info]="classe.value == 'alert-info'">Info</div>
+
+          <div class="alert" role="alert" 
+          [class.alert-warning]="classe.value =='alert-warning'">Alerta</div>
+
+          <div class="alert" role="alert"
+           [class.alert-danger]="classe.value == 'alert-danger'">Erro</div>
+
+
+           //Exemplo de como utilizar o Style Binding
+          <div class="alert alert-danger" role="alert"
+           [style.display]="classe.value == 'alert-danger' ? 'block':'none'">
+           Esse texto somente aperece em caso de alert 
+          </div>
+        </div>
     </article>
   
   </section>
