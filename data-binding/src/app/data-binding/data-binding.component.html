@@ -15,7 +15,7 @@
       <p>Os dois tem o mesmo resultado, apenas sua aplicação se divere. Portanto
           os dois podem ser usados
       </p>
-    </article> -->
+    </article> 
     <article>
         <h3>Class & Style Binding</h3>
         <div>Selecione uma classe
@@ -53,5 +53,37 @@
           </div>
         </div>
     </article>
-  
+  </section> -->
+
+  <section class="event-binding">
+    <article>
+      <h3>Event Binding</h3>
+      <div>
+        <button (click)="buttonClicked()"
+        class="btn btn-primary"> Button </button> <!--Ao ser clicado o botton (Método click) executar a function-->
+        
+        <br><br>
+
+        <input type="text" 
+        (keyup)="onKeyup($event)"
+        (keyup.enter)="saveValue($event.target.value)" 
+        (blur)="saveValue(campoInput.value)"
+        #campoInput/> <!--A cada método estamos pegando o valor do input pelo $event e execuntando uma function-->
+      <br><br>
+
+      <p>Valor atual: {{valueRealTime}}</p>
+
+      <br>
+
+      <p>O valor salvo: {{confirmedValue}}</p>
+      
+      <span
+      (mouseover)="onMouseOverOut()"
+      (mouseout)="onMouseOverOut()"
+      [class.higthligth]="isMouseOver"> Passe o mouse sobre mim </span> <!--A passar e sair o mouse do campo (mouseover - mouseout)
+      é executado uma function que troca o valor de uma varial, e se a varial for true muda ela muda aparencia (Só fica true se passarmos,
+    o mouse em cima.-->
+
+      </div>
+    </article>
   </section>
