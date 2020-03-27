@@ -9,9 +9,31 @@ export class DataBindingComponent implements OnInit {
 
   url = 'http://loiane.com';
   urlImg = 'http://lorempixel.com/400/200/nature/';
+  valueRealTime: string ;
+  confirmedValue: string;
+  
+  isMouseOver: boolean = false;
 
   getValor(){
     return 1;
+  }
+  
+  buttonClicked(){
+    alert("Button Clicked")
+  }
+
+  onKeyup(evento : KeyboardEvent){
+    console.log((<HTMLInputElement>evento.target).value)
+    this.valueRealTime = (<HTMLInputElement>event.target).value
+  }
+
+  saveValue(event){
+    this.confirmedValue = event;
+  }
+
+  onMouseOverOut(){
+    this.isMouseOver = !this.isMouseOver;
+    console.log(this.isMouseOver)
   }
 
   constructor() { }
