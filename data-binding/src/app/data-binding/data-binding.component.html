@@ -1,6 +1,6 @@
-<section class="property-binding">
+<section class="Data-Binding">
 
-   <!-- <article>
+   <!-- <article class="property-binding">
       <h3>Interpolation / Interpolação</h3>
       <p>String renderizada com interpolation {{ url }}</p>
       <p>Resultado de 1 + 1 é {{ 1 + 1 }}</p>
@@ -55,20 +55,27 @@
     </article>
   </section> -->
 
+  <!--
   <section class="event-binding">
     <article>
       <h3>Event Binding</h3>
       <div>
         <button (click)="buttonClicked()"
-        class="btn btn-primary"> Button </button> <!--Ao ser clicado o botton (Método click) executar a function-->
+        class="btn btn-primary"> Button </button> 
         
+        <button (click)="clieckedMe()"
+        class="btn btn-dark"> Magic </button>
+        <p *ngIf="Magic">Mágica</p> 
+
         <br><br>
 
         <input type="text" 
         (keyup)="onKeyup($event)"
         (keyup.enter)="saveValue($event.target.value)" 
         (blur)="saveValue(campoInput.value)"
-        #campoInput/> <!--A cada método estamos pegando o valor do input pelo $event e execuntando uma function-->
+        #campoInput/> 
+
+       
       <br><br>
 
       <p>Valor atual: {{valueRealTime}}</p>
@@ -80,10 +87,10 @@
       <span
       (mouseover)="onMouseOverOut()"
       (mouseout)="onMouseOverOut()"
-      [class.higthligth]="isMouseOver"> Passe o mouse sobre mim </span> <!--A passar e sair o mouse do campo (mouseover - mouseout)
-      é executado uma function que troca o valor de uma varial, e se a varial for true muda ela muda aparencia (Só fica true se passarmos,
-    o mouse em cima.-->
+      [class.higthligth]="isMouseOver"> Passe o mouse sobre mim </span>
 
       </div>
-    </article>
+    </article> -->
+
+    <app-meu-form></app-meu-form>
   </section>
