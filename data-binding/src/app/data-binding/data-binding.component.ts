@@ -7,14 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DataBindingComponent implements OnInit {
 
-  url = 'http://loiane.com';
-  urlImg = 'http://lorempixel.com/400/200/nature/';
-  valueRealTime: string ;
-  confirmedValue: string;
-  
-  isMouseOver: boolean = false;
+  url = 'http://loiane.com'; //Property-Binding
+  urlImg = 'http://lorempixel.com/400/200/nature/'; //Property-Binding
 
-  Magic: boolean = false;
+  valueRealTime: string ; //Class & Style Binding
+  confirmedValue: string; //Class & Style Binding
+  
+  isMouseOver: boolean = false; //Event Binding
+  Magic: boolean = false; //Event Binding
+
 
   getValor(){
     return 1;
@@ -43,6 +44,8 @@ export class DataBindingComponent implements OnInit {
     this.Magic = !this.Magic;
 
   }
+
+  
 
   constructor() { }
 
