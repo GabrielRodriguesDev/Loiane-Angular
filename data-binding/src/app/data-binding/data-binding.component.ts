@@ -14,6 +14,8 @@ export class DataBindingComponent implements OnInit {
   
   isMouseOver: boolean = false;
 
+  Magic: boolean = false;
+
   getValor(){
     return 1;
   }
@@ -34,6 +36,12 @@ export class DataBindingComponent implements OnInit {
   onMouseOverOut(){
     this.isMouseOver = !this.isMouseOver;
     console.log(this.isMouseOver)
+  }
+
+
+  clieckedMe(){
+    this.Magic = !this.Magic;
+
   }
 
   constructor() { }
