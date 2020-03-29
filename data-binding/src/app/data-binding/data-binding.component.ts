@@ -16,6 +16,10 @@ export class DataBindingComponent implements OnInit {
   isMouseOver: boolean = false; //Event Binding
   Magic: boolean = false; //Event Binding
 
+  nomeDoCurso: string = 'Angular'; //Input Properties
+  value: number = 15; //Output Properties
+
+
 
   getValor(){
     return 1;
@@ -39,11 +43,16 @@ export class DataBindingComponent implements OnInit {
     console.log(this.isMouseOver)
   }
 
-
+  
   clieckedMe(){
     this.Magic = !this.Magic;
 
   }
+
+  onNewValue(evento){
+    console.log(evento.newValue)
+  }
+
 
   
 
