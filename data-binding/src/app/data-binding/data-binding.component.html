@@ -90,7 +90,19 @@
       [class.higthligth]="isMouseOver"> Passe o mouse sobre mim </span>
 
       </div>
-    </article> -->
+    </article> 
+   </section>-->
+    <!--app-meu-form></app-meu-form-->
+  <section class="input-output-properties">
 
-    <app-meu-form></app-meu-form>
+    <article>
+      <h3>Input/Output Properties</h3>
+
+      <app-curso [nome]="nomeDoCurso"></app-curso>
+      
+    <contador [valor]="value"
+    (modifiedValue)="onNewValue($event)"
+    ></contador>
+
+    </article>
   </section>
