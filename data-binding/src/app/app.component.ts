@@ -6,5 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'data-binding';
+  
+initialValue: number = 5
+cycle: boolean = false;
+
+alterValue(){
+  this.initialValue++;
+}
+
+resurrectsCycle(){
+  this.cycle = !this.cycle;
+}
 }

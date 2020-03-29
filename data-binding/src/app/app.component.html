@@ -1,1 +1,6 @@
-<app-data-binding></app-data-binding>
+<!--app-data-binding></app-data-binding-->
+<app-cycle [value]= "initialValue" *ngIf="!cycle"></app-cycle>
+<button class="btn btn-dark" (click)="alterValue()" *ngIf="!cycle">Mudar Valor</button>
+<button class="btn btn-default" (click)="resurrectsCycle()"  *ngIf="!cycle"> Destruir </button>
+<button class="btn btn-default" (click)="resurrectsCycle()" *ngIf="cycle"> Ressucitar </button>
+
