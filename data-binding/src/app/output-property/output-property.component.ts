@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
-  selector: 'contador',
+  selector: 'app-output-property',
   templateUrl: './output-property.component.html',
   styleUrls: ['./output-property.component.css']
 })
@@ -12,6 +12,9 @@ valor: number = 0
 
 @Output()
 modifiedValue = new EventEmitter();
+
+@ViewChild('fieldInput')
+fieldInput: ElementRef;
  
 
   Assigns(){
@@ -20,6 +23,7 @@ modifiedValue = new EventEmitter();
   }
 
   Decreases(){
+    console.log(this.fieldInput.nativeElement.value)
     if(this.valor <= 0){
       this.valor = 0 
     } else {
