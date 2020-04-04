@@ -1,0 +1,32 @@
+<h5>ngIf</h5>
+
+<div *ngIf="mostrarCursos">
+    Lista de cursos aqui
+    <ul>
+        <li *ngFor="let curso of cursos; index as i">
+            {{curso}}
+        </li>
+    </ul>
+</div>
+<div *ngIf="!mostrarCursos">
+    Não existem cursos a serem listados
+</div>  
+
+<br>
+
+<h5>Hidden como alternativa</h5>
+
+<div [hidden]="!mostrarCursos">
+    Lista de cursos aqui
+    <ul>
+        <li *ngFor="let curso of cursos; index as i">
+            {{curso}}
+        </li>
+    </ul>
+</div>
+<div [hidden]="mostrarCursos">
+    Não existem cursos a serem listados
+</div> 
+
+<button (click)="alterValue()">Trocar valor</button>
+
