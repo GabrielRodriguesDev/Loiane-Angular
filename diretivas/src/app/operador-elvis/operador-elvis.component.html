@@ -1,0 +1,8 @@
+<p>Descreção: {{tarefa.desc}} </p>
+<p>Responsável: {{tarefa.responsavel.nome}}</p>
+<p>Responsável: {{tarefa.resposavel != null ? tarefa.resposavel.nome : 'Não há responsável'}}</p>
+<p>Usando o operador 'Elvis': {{tarefa.responsavel?.usuario?.nome}}</p>
+
+<!--Operador "Elvis -> '?' 
+    Serve para fazer validações entre os objetos, verifica que o objt é null, caso não seja ele segue,
+    isso ajuda, diminuindo escrita no código, como mostrado no exemplo acima"-->

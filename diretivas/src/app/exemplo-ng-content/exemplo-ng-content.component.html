@@ -1,0 +1,17 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+          <ng-content select=".titulo"></ng-content>
+
+      </h3>
+    </div>
+    <div class="panel-body">
+      <ng-content select=".corpo"></ng-content>
+    </div>
+  </div>
+
+  <!--ng content tem como função passar toda a informação posta na declaração de seu componente (app.component.html),
+            oque se mantiver dentro da tag de instacia do template, será passado através do ng-content, se caso queiramos,
+            separar as informações usamos o seletor como mostrado do exemplo acima, estamos colocando apenas oque é de class, 
+            'titulo' em um local e tudo oque está entre o class 'corpo' em outro lugar-->
+
