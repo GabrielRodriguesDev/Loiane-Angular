@@ -29,15 +29,15 @@ export class HighlightMouseDirective {
 
 
   @HostBinding('style.background') backgroundColor: string;
+  /*O HostBinding, faz a associação de um atributo ou uma classe do HTML para uma variavel, 
+    e por ela podemos alterar os atributos de forma mais "enxuta" juntamente com o 'HostListener, como mostrado nos exemplos a cima*/ 
 
   
 
   constructor
-  (
-    private _ElementRef: ElementRef,
-    private _Renderer: Renderer2
-  ) { }
+  () { }
 
 }
 
-
+/*Apresentado como fazer manipulaçã de atributos de um Elemento HTML apenas com o HostListener e usando o HostListener junto com HostBinding, 
+as duas formas apresenta o mesmo resultado, porém a junção HostListener junto com HostBinding deixa o código mais legivel */

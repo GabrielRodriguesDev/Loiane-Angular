@@ -1,13 +1,18 @@
 <!--Criando uma diretiva de atributo: ElementRef & Renderer-->
-<p FundoAmarelo #showdebola>Texto com o fundo amarelo</p>
+<p FundoAmarelo #showdebola>Texto com o fundo amarelo.</p>
 
-<button FundoAmarelo>Botão com o fundo amarelo</button>
+<button FundoAmarelo>Botão com o fundo amarelo.</button>
 <!--A diretiva tem que ser passada no elemento HTML conforme mostrado acima-->
 
 
 <!--Diretivas: HostListinner & HostBinding-->
-
-
 <p HighlightMouse>
     Texto com o Highligth quando passo o mouse.
 </p>
+
+<!--Input & Property Binding (Nas Diretivas)-->
+
+<!--p  [Highlight]="'red'" 
+    [defaultColor]="'grey'" >
+    Texto  com highlight com cores customizadas.
+</p-->
