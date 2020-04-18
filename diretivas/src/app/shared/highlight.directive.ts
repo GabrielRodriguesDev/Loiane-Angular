@@ -6,11 +6,11 @@ import { Directive, HostListener, HostBinding, Input } from '@angular/core';
 export class HighlightDirective {
 
   @HostListener('mouseenter') onMouseOver(){
-    this.backgroundColor='yellow'
+    this.backgroundColor= this.highlightColor
   }
 
   @HostListener('mouseleave') onMouseLeave(){
-    this.backgroundColor = 'white'
+    this.backgroundColor = this.defaultColor
   }
 
   @HostBinding('style.background') backgroundColor: string;
@@ -18,7 +18,7 @@ export class HighlightDirective {
   @Input() 
   defaultColor: string = 'white'; //Como mostrado podemos usar os Input e Property Binding nas diretivas
   
-  @Input('Highlight') 
+  @Input() 
   highlightColor: string = 'yellow';
 
 

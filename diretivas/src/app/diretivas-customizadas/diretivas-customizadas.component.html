@@ -1,4 +1,5 @@
 <!--Criando uma diretiva de atributo: ElementRef & Renderer-->
+<h4>Criando uma diretiva de atributo: ElementRef & Renderer</h4>
 <p FundoAmarelo #showdebola>Texto com o fundo amarelo.</p>
 
 <button FundoAmarelo>Botão com o fundo amarelo.</button>
@@ -6,13 +7,32 @@
 
 
 <!--Diretivas: HostListinner & HostBinding-->
+<h4>Diretivas: HostListinner & HostBinding</h4>
 <p HighlightMouse>
     Texto com o Highligth quando passo o mouse.
 </p>
 
 <!--Input & Property Binding (Nas Diretivas)-->
 
-<!--p  [Highlight]="'red'" 
-    [defaultColor]="'grey'" >
+<h4>Input & Property Binding (Nas Diretivas)</h4>
+
+<p  
+    Highlight
+    [defaultColor]="'grey'"
+    [highlightColor]= "'red'"
+     >
     Texto  com highlight com cores customizadas.
-</p-->
+</p>
+
+<!--diretiva de estrutura ng-else-->
+<h4>Diretiva de estrutra ng-else</h4>
+
+<div *ngIf="mostrarCursos">
+    Lista de cursos aqui
+</div>
+
+<div *ngElse = "mostrarCursos">
+    Não existem cursos a serem listados
+</div>  
+
+<button class="btn btn-dark" (click)="alterValue()">Trocar valor</button>
