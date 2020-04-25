@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "servicos": {
@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "servicos"
+    }
+  },
+  "defaultProject": "servicos",
+  "cli": {
+    "analytics": "29e95c9a-a719-4487-97c4-406ee75a4741"
+  }
 }
