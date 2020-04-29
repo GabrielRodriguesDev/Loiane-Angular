@@ -8,7 +8,6 @@ import { CursoModule } from './cursos/curso.module'
 @NgModule({
   declarations: [
     AppComponent,
-    
 
   ],
   imports: [

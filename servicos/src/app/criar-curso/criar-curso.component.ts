@@ -6,7 +6,8 @@ import { stringify } from 'querystring';
 @Component({
   selector: 'app-criar-curso',
   templateUrl: './criar-curso.component.html',
-  styleUrls: ['./criar-curso.component.scss']
+  styleUrls: ['./criar-curso.component.scss'],
+  providers: [CursoService]
 })
 export class CriarCursoComponent implements OnInit {
 
