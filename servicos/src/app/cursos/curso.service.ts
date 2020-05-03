@@ -1,4 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
+import { LogService } from '../shared/log.service';
 
 
 @Injectable()
@@ -6,7 +7,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 export class CursoService {
 
 
-    constructor(){
+    constructor(private logService : LogService){
         console.log(CursoService)
     }
 
@@ -20,10 +21,12 @@ export class CursoService {
     cursos: string [] = ['Angular', 'Node.js', 'Android']
 
     getCursos(){
+        this.logService.consoleLog("Obtendo lista de cursos")
         return this.cursos
     }
     
     addCursos(curso:string){
+        this.logService.consoleLog(`Criando um novo curso ${curso}`)
       this.cursos.push(curso);  
       this.emitirCursoCriado.emit(curso);//Emissao de um evento para algum componente ser notificado quando houve alguma mudança
       CursoService.criouNovoCuso.emit(curso);//Emissao de um evento para algum componente ser notificado quando houve alguma mudança, usando varial static
@@ -31,3 +34,5 @@ export class CursoService {
     
     
 }
+/*Confome mostrando acima podemos noticar os componentes de duas formas, poderia apenas ser com o static, 
+pois não seria necessario ficar fazendo instancia da servico em todos os componentes que forem usarem */
