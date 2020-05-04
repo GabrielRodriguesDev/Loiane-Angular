@@ -9,4 +9,36 @@
 <br>
 <p>Livro: {{livro | json}}</p>
 
+<input type="text" [(ngModel)]="filtro">
+<br>
+<input type="text" #newValueInput>
+<button (click)="newValue(newValueInput.value)">Submit</button>
+
+<h5> Pipe Puro </h5>
+<ul>
+    <li *ngFor="let liv of livros | filtroArray:  filtro; let index = index">
+        {{liv}}
+    </li>
+</ul>
+
+<h5> Pipe Impuro</h5>
+<ul>
+    <li *ngFor="let liv of livros | filtroArrayImpuro: filtro; let index = index">
+        {{liv}}
+    </li>
+</ul>
+
+<h5> Maneira correta de filtro nos projetos</h5>
+<ul>
+    <li *ngFor="let liv of getCursos()  ; let index = index">
+        {{liv}}
+    </li>
+</ul>
+
+<h5>Pipes Async</h5>
+<p> {{ valueAsync | async }}</p> <!--O pipe Async exibe o dado na tela com atraso, muito usado para quando
+se quer receber um dado de uma requisição Http, geralmente é usando com Promisses e Observable, pois esse pipe, 
+só mostra o value (Que é oque realmente importa na resquisição.)-->
+
+
 
