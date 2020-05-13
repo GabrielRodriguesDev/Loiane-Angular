@@ -4,12 +4,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component'
 import { CursosComponent } from './cursos/cursos.component';
+import { CursoDetalheComponent } from './curso-detalhe/curso-detalhe.component';
 
 
 const routes: Routes = [ //Const que contém as rotas e seus redirecionamentos
   { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent},
-  { path: 'cursos', component: CursosComponent}
+  { path: 'Login', component: LoginComponent},
+  { path: 'Cursos', component: CursosComponent},
+  { path: 'Curso/:id', component: CursoDetalheComponent} /*Usando parametros nas rotas */
 ];
 
 @NgModule({ //Arquivos de configuração das rotas
