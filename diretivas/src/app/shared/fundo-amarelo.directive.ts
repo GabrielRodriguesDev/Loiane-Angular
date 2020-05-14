@@ -23,7 +23,7 @@ export class FundoAmareloDirective {
   como por exemplo o ElementRef*/
 
 }
-/*A manipulação do DOM pode ser feita através das duas forças apresentadas, porém a 'primeira' direto com o ElementRef, 
+/*A manipulação do DOM pode ser feita através das duas formas apresentadas, porém a 'primeira' direto com o ElementRef, 
 pode gerar vunerabilidade no sistema, portanto o Angular, sugere que essa manipulação seja feito com o renderer. 
 */
 
