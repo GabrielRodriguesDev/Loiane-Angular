@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CursosService } from './cursos.service';
 
 @Component({
   selector: 'app-cursos',
@@ -8,11 +9,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CursosComponent implements OnInit {
 
-  constructor( private route:ActivatedRoute) { 
-    console.log(this.route)
+  cursos: any [];
+
+  constructor( private CursosService: CursosService) { 
+    
   }
 
   ngOnInit(): void {
+    this.cursos = this.CursosService.getCursos();
   }
 
 }
