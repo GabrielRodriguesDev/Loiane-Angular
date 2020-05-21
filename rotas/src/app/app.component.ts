@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'rotas';
 
-  params: number
+
 
   constructor(
 
@@ -18,10 +18,5 @@ export class AppComponent {
   ){
 
   }
-  setParamsPaggination(params: number){
-    this.params = params //Pegando o valor passado pelos paggination
-
-    this.router.navigate(['Cursos'],
-    {queryParams: {'pagina': params}})//Atualizando a rota junto o queryParams, após passarem receber o valor do paggination  
-  }
+  
 }

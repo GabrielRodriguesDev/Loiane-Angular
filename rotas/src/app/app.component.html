@@ -3,26 +3,15 @@
       <a routerLink='' class="brand-logo right">Routes</a>
       <ul id="nav-mobile" class="left hide-on-med-and-down">
         <li routerLinkActive="active"><a routerLink='/Login'>Login</a></li> <!--Para animação de "selecionado", é necessario usar a diretiva routerLink e colocar a propriedade Css disponibilizada pelo framework CSS como usado no exemplo usando o Materiallize-->
-        <li routerLinkActive="active"><a routerLink='/Cursos' [queryParams]="{pagina:params}">Cursos</a></li>
-        <li routerLinkActive="active"><a [routerLink]="['Curso',idCurso.value]">Cursos ID</a></li>  
+        <li routerLinkActive="active"><a routerLink='/Cursos'>Cursos</a></li>
       </ul>
     </div>
 </nav>
 
 <div class="container">
-    <p>Entre com o Id do curso: </p>
-    <div class="row">
-        <div class="input-field col s12">
-          <input id="id" type="text" #idCurso>
-          <label for="id">ID</label>
-        </div>
-    <router-outlet></router-outlet> <!-- Elemento que permite a troca de rotas e exibição delas -->
-</div>
+  <router-outlet></router-outlet> <!-- Elemento que permite a troca de rotas e exibição delas -->
 
-<ul class="pagination">
-  <li class="waves-effect"><a (click)="setParamsPaggination(1)">1</a></li>
-  <li class="waves-effect"><a (click)="setParamsPaggination(2)">2</a></li>
-  <li class="waves-effect"><a (click)="setParamsPaggination(3)">3</a></li>
-  <li class="waves-effect"><a (click)="setParamsPaggination(4)">4</a></li>
-  <li class="waves-effect"><a (click)="setParamsPaggination(5)">5</a></li>
-</ul>
+
+
+
+</div>
