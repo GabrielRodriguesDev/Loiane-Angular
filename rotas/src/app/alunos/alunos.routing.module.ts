@@ -10,7 +10,7 @@ import { AlunosFormComponent } from './alunos-form/alunos-form.component';
             children: [
                 { path: 'novo', component: AlunosFormComponent },
                 { path: ':id', component: AlunoDetalheComponent },
-                { path: ':id/editar', component: AlunosFormComponent },
+                { path: ':id/edit', component: AlunosFormComponent },
         ]},
         
         
