@@ -10,7 +10,6 @@ import { CursosService } from '../cursos.service';
 })
 export class CursoDetalheComponent implements OnInit {
 
-  id: number;
   subscription : Subscription;
 
   curso: any;
@@ -18,7 +17,7 @@ export class CursoDetalheComponent implements OnInit {
 
 
   constructor(
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private router: Router,
     private CursoService: CursosService
     ) {  //Instacia da classe do angular que nós trás as informações da rota que está ativa no momento, onde podemos acessar os parametros por exemplo.
@@ -28,14 +27,16 @@ export class CursoDetalheComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.subscription = this.route.params.subscribe( //A cada carregamento da classe está sendo feito a inscrição no BehaviorSubject esperando a mudança no 'params.id', (id que foi passado como parametro na rota) e colocando na variavel.;
+    
+    this.subscription = this.activatedRoute.params.subscribe( //A cada carregamento da classe está sendo feito a inscrição no BehaviorSubject esperando a mudança no 'params.id', (id que foi passado como parametro na rota) e colocando na variavel.;
       (params: any) => {
-        this.id = params['id']
+        let id = params['id']
 
-        this.curso = this.CursoService.getCurso(this.id) // Chamando a função que valida se o id passado é referente a algum curso, se for retorna o curso de acordo com o id passado, se não retorna null 
+        this.curso = this.CursoService.getCurso(id) // Chamando a função que valida se o id passado é referente a algum curso, se for retorna o curso de acordo com o id passado, se não retorna null 
 
-        if(this.curso == null){//Caso o id do curso não exista o curso receberá null, caso o curso seja null ele vai redireciona a rota para o componente CursoNaoEncontrado, isso é feito pela classe  'Router'
-          this.router.navigate(['NaoEncontrado'])
+        console.log(this.activatedRoute.params)
+        if(id == null){//Caso o id do curso não exista o curso receberá null, caso o curso seja null ele vai redireciona a rota para o componente CursoNaoEncontrado, isso é feito pela classe  'Router'
+          this.router.navigate(['NaoEcontrado'])
         }
       }
     );

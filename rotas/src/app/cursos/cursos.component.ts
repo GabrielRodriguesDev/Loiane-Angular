@@ -25,7 +25,7 @@ export class CursosComponent implements OnInit {
     private ActivatedRoute: ActivatedRoute,
     private router: Router
     ) { 
-    console.log(this.ActivatedRoute.queryParams)
+    
   }
 
   ngOnInit(): void {
@@ -38,7 +38,6 @@ export class CursosComponent implements OnInit {
          this.pagina = queryParams['pagina'];
        }
     )
-    console.log(this.pagina)
 
   }
  

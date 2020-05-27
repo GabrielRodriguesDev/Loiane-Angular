@@ -28,15 +28,16 @@ export class AlunoDetalheComponent implements OnInit {
 
        this.aluno = this.alunosService.getAluno(id)
 
+       console.log(this.activatedRoute.params)
         if(id == null){
           this.router.navigate(['NaoEncontrado'])
         }
       }
-    ) 
+    );
   }
 
   editAluno () {
-    this.router.navigate(['/alunos', this.aluno.id, 'edit'])//Alterando a rota para a rota de alterar o aluno conforma o ID passado pela rota ativa que foi recuperado no ActivatedRoute. 
+    this.router.navigate(['/Alunos', this.aluno.id, 'edit'])//Alterando a rota para a rota de alterar o aluno conforma o ID passado pela rota ativa que foi recuperado no ActivatedRoute. 
   }
 
   ngOnDestroy(): void {
