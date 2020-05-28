@@ -16,8 +16,9 @@ const routes: Routes = [ //Const que contém as rotas e seus redirecionamentos
     loadChildren: () => import('./alunos/alunos.module').then(m => m.AlunosModule) // Example lazy load (Estudar mais)
   },
 
-  { path: '', component: HomeComponent },
+  { path: '', component: LoginComponent },
   { path: 'Login', component: LoginComponent},
+  { path: 'Home', component: HomeComponent}
 ];
 
 @NgModule({ //Arquivos de configuração das rotas
