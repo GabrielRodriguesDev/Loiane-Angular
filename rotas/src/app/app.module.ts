@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './login/auth.service';
 import { FormsModule } from '@angular/forms';
+import { AuthGuard } from './guards/auth.guard';
 //import { CursosModule } from './cursos/cursos.module';
 //import { AlunosModule } from './alunos/alunos.module';
 
@@ -31,7 +32,7 @@ import { FormsModule } from '@angular/forms';
 
 
   providers: [
-    AuthService
+    AuthService, AuthGuard
   ],
   bootstrap: [AppComponent]
 })

@@ -19,16 +19,22 @@ export class AuthService {
   validateLogin(user: User){
     if (user.name === 'Gabriel@' &&
     user.password === 'fx870'){
+
       this.authenticatedUser = true;
 
       this.showMenuEmitter.emit(true);//Quando o user for autenticado emitir um valor booleano. (Vai servir para manipular o DOM (exibir os links no navbar))
-
       
       this.router.navigate(['/Home'])// Mandando para a Home page
+      
     } else {
+
       this.authenticatedUser = false;
 
       this.showMenuEmitter.emit(false); //Quando o user não for autenticado emitir um valor booleano. (Vai servir para manipular o DOM (permanecer sem a exibição dos links no navbar))
     }
+  }
+
+  authUser(){
+    return this.authenticatedUser
   }
 }
