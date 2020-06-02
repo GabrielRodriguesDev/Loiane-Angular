@@ -8,6 +8,9 @@ import { LoginComponent } from './login/login.component';
 import { AuthService } from './login/auth.service';
 import { FormsModule } from '@angular/forms';
 import { AuthGuard } from './guards/auth.guard';
+import { CursosGuard } from './guards/cursos.guard'
+import { AlunosGuard } from './guards/alunos.guard';
+
 //import { CursosModule } from './cursos/cursos.module';
 //import { AlunosModule } from './alunos/alunos.module';
 
@@ -32,7 +35,10 @@ import { AuthGuard } from './guards/auth.guard';
 
 
   providers: [
-    AuthService, AuthGuard
+    AuthService, 
+    AuthGuard,//Deixando a Guarda de rotas para um escopo global 
+    CursosGuard, //Deixando a Guarda de rotas para um escopo global 
+    //AlunosGuard // Removendo do escopo global para ver outra possivel alocação.
   ],
   bootstrap: [AppComponent]
 })

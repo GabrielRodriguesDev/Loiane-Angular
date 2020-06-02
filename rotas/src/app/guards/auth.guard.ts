@@ -3,10 +3,10 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from
 import { Observable } from 'rxjs';
 import { AuthService } from '../login/auth.service';
 
-@Injectable({
+@Injectable({//Como injetamos essa clase ela precisa do decorator de Injectable
   providedIn: 'root'
 })
-//Guarda de rota, ele guarda a rota a partir de sua parametrização, por exemplo um usuario não autenticado tentando entrar em outra rota direto pela url ou recarregar a pag
+//Guarda de rota, ele "guarda" a rota a partir de sua parametrização, por exemplo um usuario não autenticado tentando entrar em outra rota direto pela url ou recarregar a pag
 export class AuthGuard implements CanActivate{ //O Guarda de rotas precisa estar implementando o CanActivate e seus métodos necessários
 
   constructor(
