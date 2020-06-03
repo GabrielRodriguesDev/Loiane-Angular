@@ -9,13 +9,10 @@ export class AlunosGuard implements CanActivateChild {
         state: RouterStateSnapshot
     ): Observable<boolean> | Promise<boolean> | boolean {
 
-        console.log(route);
-        console.log(state);
-
-        if(state.url.includes('edit')){
+        /*(if(state.url.includes('edit')){
             alert('Num vai não ')
             return false
-        }
+        }*/
         return true
     }
 }

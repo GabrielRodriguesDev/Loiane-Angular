@@ -4,6 +4,7 @@ import { AlunosComponent } from './alunos.component';
 import { AlunoDetalheComponent } from './aluno-detalhe/aluno-detalhe.component';
 import { AlunosFormComponent } from './alunos-form/alunos-form.component';
 import { AlunosGuard } from '../guards/alunos.guard';
+import { AlunosDeactivateGuard } from '../guards/alunos-deactivate.guard';
 
 
     const alunosRouting: Routes = [
@@ -12,7 +13,8 @@ import { AlunosGuard } from '../guards/alunos.guard';
             children: [
                 { path: 'novo', component: AlunosFormComponent },
                 { path: ':id', component: AlunoDetalheComponent },
-                { path: ':id/edit', component: AlunosFormComponent },
+                { path: ':id/edit', component: AlunosFormComponent,
+                    canDeactivate:[AlunosDeactivateGuard]},
                 
         ]},
         

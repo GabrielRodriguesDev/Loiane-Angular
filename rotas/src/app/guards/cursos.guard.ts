@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-// O CanActivedChild, ele cuida de casos onde quer guardar algo especifico Exemplo: O user não pode editar apenas ler  informaçã.
+// O CanActivedChild, ele cuida de casos onde quer guardar algo especifico Exemplo: O user não pode editar apenas ler  informação. A partir do retorno se for true libera a rota se for false ele não deixar acessar a rota.
 @Injectable()// Como usamos injeção de dependencia temos que usar o decorator injecatable
 export class CursosGuard implements CanActivateChild {//O guarda de rota filha precisa ser implementado o CanActivatedChild e os métodos necessários (route e state)
     canActivateChild(

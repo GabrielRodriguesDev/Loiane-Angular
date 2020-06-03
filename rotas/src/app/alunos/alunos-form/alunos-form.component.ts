@@ -12,6 +12,7 @@ export class AlunosFormComponent implements OnInit {
 
   subscribe: Subscription;
   aluno: any;
+   private alterForm: boolean = false
 
   constructor(
     private alunosService : AlunosService,
@@ -34,9 +35,22 @@ export class AlunosFormComponent implements OnInit {
     )
   }
 
-  ngOnDestroy(): void {
-    
+  ngOnDestroy(): void {    
     this.subscribe.unsubscribe()
   }
+
+  onInput(){
+    this.alterForm = true
+    console.log('Alter')
+  }
+
+  canChangeRoute(){
+    if(this.alterForm == true){
+      confirm('Deseja perder os dados alterados que não foram salvos?')
+      console.log(this.alterForm)
+      return false
+    }
+    return true
+  }  
 
 }
