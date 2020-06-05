@@ -19,6 +19,8 @@ export class AuthGuard implements CanActivate{ //O Guarda de rotas precisa estar
     state: RouterStateSnapshot //Recebe o status da rota
   ) : Observable<boolean> | boolean {
     
+    console.log('AuthGuard: Verificando se tem acesso as proximas rotas (Olhando o login pra saber essa informação')
+
     if (this.authService.authUser()){//Recebe o valor da autenticação e verifica se é 'true'
       return true 
     } 

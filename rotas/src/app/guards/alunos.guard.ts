@@ -13,6 +13,7 @@ export class AlunosGuard implements CanActivateChild {
             alert('Num vai não ')
             return false
         }*/
+        console.log('AlunosGuard: Verificando se tem acesso a rota filha')
         return true
     }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlunosService } from '../alunos.service';
+import { Aluno } from '../aluno';
 
 @Component({
   selector: 'app-aluno-detalhe',
@@ -10,7 +11,7 @@ import { AlunosService } from '../alunos.service';
 })
 export class AlunoDetalheComponent implements OnInit {
 
-  aluno: any;
+  aluno: Aluno;
 
   subscribe: Subscription;
 
@@ -21,7 +22,7 @@ export class AlunoDetalheComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
+    /*
     this.subscribe = this.activatedRoute.params.subscribe(
       (params: any) => {
         let id = params['id']
@@ -33,8 +34,19 @@ export class AlunoDetalheComponent implements OnInit {
           this.router.navigate(['NaoEncontrado'])
         }
       }
-    );
-  }
+    );*/
+    this.subscribe = this.activatedRoute.data.subscribe(
+      
+      (info) => {
+       this.aluno = info.Aluno
+       console.log('AlunoDetalheComponent: Recebendo dados do Resolver')
+      }
+    )
+
+      }
+  
+    
+  
 
   editAluno () {
     this.router.navigate(['/Alunos', this.aluno.id, 'edit'])//Alterando a rota para a rota de alterar o aluno conforma o ID passado pela rota ativa que foi recuperado no ActivatedRoute. 

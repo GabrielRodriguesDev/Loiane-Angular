@@ -3,6 +3,7 @@ import { AlunosService } from '../alunos.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IformDeactivate } from 'src/app/guards/iform-deactivate';
+import { Aluno } from '../aluno';
 
 @Component({
   selector: 'app-alunos-form',
@@ -12,7 +13,7 @@ import { IformDeactivate } from 'src/app/guards/iform-deactivate';
 export class AlunosFormComponent implements OnInit, IformDeactivate {
 
   subscribe: Subscription;
-  aluno: any;
+  aluno: Aluno;
    private alterForm: boolean = false
 
   constructor(
