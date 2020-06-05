@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { AlunosService } from '../alunos.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { IformDeactivate } from 'src/app/guards/iform-deactivate';
 
 @Component({
   selector: 'app-alunos-form',
   templateUrl: './alunos-form.component.html',
   styleUrls: ['./alunos-form.component.scss']
 })
-export class AlunosFormComponent implements OnInit {
+export class AlunosFormComponent implements OnInit, IformDeactivate {
 
   subscribe: Subscription;
   aluno: any;
@@ -52,5 +53,9 @@ export class AlunosFormComponent implements OnInit {
     }
     return true
   }  
+
+  canDisable(){
+    this.canChangeRoute();// Usando uma interface para ter uma guarda de desativação de rota generica
+  }
 
 }
