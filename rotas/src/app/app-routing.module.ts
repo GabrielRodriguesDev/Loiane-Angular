@@ -36,7 +36,7 @@ const routes: Routes = [ //Const que contém as rotas e seus redirecionamentos
 ];
 
 @NgModule({ //Arquivos de configuração das rotas
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes /* Aqui podemos usar um segundo parametro "UseHash: true" para indicar que queremos usar a Hashtag nos nossos roteamentos, essa mudança é feita devido a compatibilidade com requisições HTTP ao BackEnd (Essa incompatibilidade existe em algumas liguagens apenas*/)],
   exports: [RouterModule]
 })
 
