@@ -1,13 +1,15 @@
-<form>
+<form #f="ngForm" (ngSubmit)="onSubmit(f)">
     <div class="form-group">
       <label for="nome">Nome</label>
-      <input type="text" class="form-control" 
-      id="nome" placeholder="Nome">
+      <input type="text" class="form-control" name="nome" 
+      id="nome" placeholder="Nome" [(ngModel)]="user.name"
+      required>
     </div>
     <div class="form-group">
       <label for="email">Email</label>
-      <input type="email" class="form-control" 
-      id="email" placeholder="nome@email.com">
+      <input type="email" class="form-control" name="email"
+      id="email" placeholder="nome@email.com" [(ngModel)]="user.email"
+      required email> <!--Podemos fazer tanto o Two-way-data-binding [(ngModel)] como o Property Binding [ngModel] com o template driven  -->
     </div>
-    <button type="submit" class="btn btn-dark">Submit</button>
+    <button type="submit" class="btn btn-dark" fo>Submit</button>
   </form>
