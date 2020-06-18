@@ -9,8 +9,8 @@ import { FormsModule, FormGroup } from '@angular/forms';
 export class TemplateFormComponent implements OnInit {
 
   user: any = {
-    name: 'Gabriel',
-    email: 'gabriel@onsist.com.br'
+    name: null,
+    email: null //'gabriel@onsist.com.br'
   }
   constructor() { }
 
