@@ -1,0 +1,15 @@
+<div style="margin-top: 20px;" *ngIf="form">
+    <div>
+        Detalhes Form
+    </div>
+    <pre>
+        Form Valid: {{ form.valid }}
+    </pre>
+    <pre>
+        Form Submited: {{ form.valid }}
+    </pre>
+    <pre>
+        Values: <br> {{ form.value | json }}
+    </pre>
+</div>
+<!--(Dica): Verificando dados do Form no template com JSON (Geralmente usado para DEBBUG)-->

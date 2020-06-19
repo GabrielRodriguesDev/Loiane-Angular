@@ -1,31 +1,115 @@
-<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+<form #form="ngForm" (ngSubmit)="onSubmit(form)" style="margin-top: 10px;">
     <div class="form-group" 
     [class.was-validated]="!name.valid && name.touched"> <!--Fazendo formatação de erros com CSS usando as  classes de forms do Angular (estados do angular sobre os campos : ng-touched & ng-unthouched - ng-dirty &  ng-pristine....), juntamente com classes do framwork CSS-->
-      <label for="nome">Nome</label>
-      <input type="text" class="form-control" name="nome" 
-      id="nome" placeholder="Nome" [(ngModel)]="user.name"
-      required #name="ngModel">
-      
-      <!--div> 
-        {{name.className}}
-      </div-->
-
-      <div class="alert alert-light" role="alert"
-      *ngIf="!name.valid && name.touched"> <!--Fazendo formatação de erros com CSS usando as  classes de forms do Angular (estados do angular sobre os campos : ng-touched & ng-unthouched - ng-dirty &  ng-pristine....), juntamente com classes do framwork CSS-->
-        <strong>Nome</strong> é obrigatório.
-      </div>
+      <div>
+        <label for="nome">Nome</label>
+      </div> 
+      <div >
+        <input type="text" class="form-control" name="nome" 
+        id="nome" placeholder="Nome" [(ngModel)]="user.name"
+        required #name="ngModel">
+        <div class="alert alert-light" role="alert"
+        *ngIf="!name.valid && name.touched"> <!--Fazendo formatação de erros com CSS usando as  classes de forms do Angular (estados do angular sobre os campos : ng-touched & ng-unthouched - ng-dirty &  ng-pristine....), juntamente com classes do framwork CSS-->
+          <strong>Nome</strong> é obrigatório.
+        </div>
+      </div> 
     </div>
     <div class="form-group"
     [class.was-validated]="!email.valid && email.touched"> <!--Fazendo formatação de erros com CSS usando as  classes de forms do Angular (estados do angular sobre os campos : ng-touched & ng-unthouched - ng-dirty &  ng-pristine....), juntamente com classes do framwork CSS-->
-      <label for="email">Email</label>
-      <input type="email" class="form-control" name="email"
-      id="email" placeholder="nome@email.com" [(ngModel)]="user.email"
-      required email #email="ngModel" > <!--Podemos fazer tanto o Two-way-data-binding [(ngModel)] como o Property Binding [ngModel] com o template driven  -->
-      <div class="alert alert-light" role="alert"
-      *ngIf="!email.valid && email.touched"> <!--Fazendo formatação de erros com CSS usando as  classes de forms do Angular (estados do angular sobre os campos : ng-touched & ng-unthouched - ng-dirty &  ng-pristine....), juntamente com classes do framwork CSS-->
-        <strong>Email</strong> é obrigatório.
+      <div >
+        <label for="email">Email</label>
       </div>
-    </div>  
+      <div >
+        <input type="email" class="form-control" name="email"
+        id="email" placeholder="nome@email.com" [(ngModel)]="user.email"
+        required email #email="ngModel" > <!--Podemos fazer tanto o Two-way-data-binding [(ngModel)] como o Property Binding [ngModel] com o template driven  -->
+        <div class="alert alert-light" role="alert"
+        *ngIf="!email.valid && email.touched"> <!--Fazendo formatação de erros com CSS usando as  classes de forms do Angular (estados do angular sobre os campos : ng-touched & ng-unthouched - ng-dirty &  ng-pristine....), juntamente com classes do framwork CSS-->
+          <strong>Email</strong> é obrigatório.
+        </div>
+      </div>
+    </div> 
+
+    <div class="form-row ">
+      <div class="form-group col-md-3"
+      [class.was-validated]="!cep.valid && cep.touched">
+        <label for="cep">CEP</label>
+        <input type="text" class="form-control" id="cep"
+        name="cep" ngModel required #cep="ngModel">
+        <div class="alert alert-light" role="alert"
+        *ngIf="!cep.valid && cep.touched"> <!--Fazendo formatação de erros com CSS usando as  classes de forms do Angular (estados do angular sobre os campos : ng-touched & ng-unthouched - ng-dirty &  ng-pristine....), juntamente com classes do framwork CSS-->
+          <strong>CEP</strong> é obrigatório.
+        </div> 
+      </div>   
+      <div class="form-group col-md-3"
+      [class.was-validated]="!numero.valid && numero.touched">
+        <label for="numero">Número</label>
+        <input type="text" class="form-control" id="numero"
+        name="numero" ngModel required #numero="ngModel">
+        <div class="alert alert-light" role="alert"
+        *ngIf="!numero.valid && numero.touched"> <!--Fazendo formatação de erros com CSS usando as  classes de forms do Angular (estados do angular sobre os campos : ng-touched & ng-unthouched - ng-dirty &  ng-pristine....), juntamente com classes do framwork CSS-->
+          <strong>Número</strong> é obrigatório.
+        </div> 
+      </div>
+      <div class="form-group col-md-6">
+        <label for="complemento">Complemento</label>
+        <input type="text" class="form-control" id="complemento"
+        name="complemento" ngModel  #complemento="ngModel">
+      </div>   
+    </div>
+
+    <div class="form-group" 
+    [class.was-validated]="!rua.valid && rua.touched"> <!--Fazendo formatação de erros com CSS usando as  classes de forms do Angular (estados do angular sobre os campos : ng-touched & ng-unthouched - ng-dirty &  ng-pristine....), juntamente com classes do framwork CSS-->
+    <div>
+      <label for="rua">Rua</label>
+    </div> 
+        <div >
+          <input type="text" class="form-control" name="" 
+          id="rua"  [(ngModel)]="user.rua"
+          required #rua="ngModel" readonly>
+          <div class="alert alert-light" role="alert"
+          *ngIf="!rua.valid && rua.touched"> <!--Fazendo formatação de erros com CSS usando as  classes de forms do Angular (estados do angular sobre os campos : ng-touched & ng-unthouched - ng-dirty &  ng-pristine....), juntamente com classes do framwork CSS-->
+            <strong>Rua</strong> é obrigatório.
+          </div>
+        </div> 
+    </div>
+
+    <div class="form-row ">
+      <div class="form-group col-md-5"
+      [class.was-validated]="!bairro.valid && bairro.touched">
+        <label for="bairro">Bairro</label>
+        <input type="text" class="form-control" id="bairro"
+        name="bairro" ngModel required #bairro="ngModel">
+        <div class="alert alert-light" role="alert"
+        *ngIf="!bairro.valid && bairro.touched"> <!--Fazendo formatação de erros com CSS usando as  classes de forms do Angular (estados do angular sobre os campos : ng-touched & ng-unthouched - ng-dirty &  ng-pristine....), juntamente com classes do framwork CSS-->
+          <strong>Bairro</strong> é obrigatório.
+        </div>
+      </div>   
+      <div class="form-group col-md-4"
+      [class.was-validated]="!cidade.valid && cidade.touched">
+        <label for="cidade">Cidade</label>
+        <input type="text" class="form-control" id="cidade"
+        name="cidade" ngModel required #cidade="ngModel">
+        <div class="alert alert-light" role="alert"
+        *ngIf="!cidade.valid && cidade.touched"> <!--Fazendo formatação de erros com CSS usando as  classes de forms do Angular (estados do angular sobre os campos : ng-touched & ng-unthouched - ng-dirty &  ng-pristine....), juntamente com classes do framwork CSS-->
+          <strong>Cidade</strong> é obrigatório.
+        </div> 
+      </div>
+      <div class="form-group col-md-3"
+      [class.was-validated]="!estado.valid && estado.touched">
+        <label for="estado">Estado</label>
+        <input type="text" class="form-control" id="estado"
+        name="estado" ngModel required #estado="ngModel">
+        <div class="alert alert-light" role="alert"
+        *ngIf="!estado.valid && estado.touched"> <!--Fazendo formatação de erros com CSS usando as  classes de forms do Angular (estados do angular sobre os campos : ng-touched & ng-unthouched - ng-dirty &  ng-pristine....), juntamente com classes do framwork CSS-->
+          <strong>Estado</strong> é obrigatório.
+        </div> 
+      </div>
+    </div>
+     
     <button type="submit" class="btn btn-dark" 
     [disabled]="!form.valid">Submit</button> <!--Fazendo formatação no botão com base da condição do "form", enquanto não for valido manter desabilitado-->
+  
+  <app-form-debug [form]="form"></app-form-debug>
+
   </form>
