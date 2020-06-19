@@ -1,0 +1,31 @@
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <div class="form-group" 
+    [class.was-validated]="!name.valid && name.touched"> <!--Fazendo formatação de erros com CSS usando as  classes de forms do Angular (estados do angular sobre os campos : ng-touched & ng-unthouched - ng-dirty &  ng-pristine....), juntamente com classes do framwork CSS-->
+      <label for="nome">Nome</label>
+      <input type="text" class="form-control" name="nome" 
+      id="nome" placeholder="Nome" [(ngModel)]="user.name"
+      required #name="ngModel">
+      
+      <!--div> 
+        {{name.className}}
+      </div-->
+
+      <div class="alert alert-light" role="alert"
+      *ngIf="!name.valid && name.touched"> <!--Fazendo formatação de erros com CSS usando as  classes de forms do Angular (estados do angular sobre os campos : ng-touched & ng-unthouched - ng-dirty &  ng-pristine....), juntamente com classes do framwork CSS-->
+        <strong>Nome</strong> é obrigatório.
+      </div>
+    </div>
+    <div class="form-group"
+    [class.was-validated]="!email.valid && email.touched"> <!--Fazendo formatação de erros com CSS usando as  classes de forms do Angular (estados do angular sobre os campos : ng-touched & ng-unthouched - ng-dirty &  ng-pristine....), juntamente com classes do framwork CSS-->
+      <label for="email">Email</label>
+      <input type="email" class="form-control" name="email"
+      id="email" placeholder="nome@email.com" [(ngModel)]="user.email"
+      required email #email="ngModel" > <!--Podemos fazer tanto o Two-way-data-binding [(ngModel)] como o Property Binding [ngModel] com o template driven  -->
+      <div class="alert alert-light" role="alert"
+      *ngIf="!email.valid && email.touched"> <!--Fazendo formatação de erros com CSS usando as  classes de forms do Angular (estados do angular sobre os campos : ng-touched & ng-unthouched - ng-dirty &  ng-pristine....), juntamente com classes do framwork CSS-->
+        <strong>Email</strong> é obrigatório.
+      </div>
+    </div>  
+    <button type="submit" class="btn btn-dark" 
+    [disabled]="!form.valid">Submit</button> <!--Fazendo formatação no botão com base da condição do "form", enquanto não for valido manter desabilitado-->
+  </form>

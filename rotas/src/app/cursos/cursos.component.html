@@ -1,1 +1,21 @@
-<p>cursos works!</p>
+<h2>Lista de cursos</h2>
+<p>queryParams: {{pagina}}</p>
+
+<div class="collection">
+    <a  class="collection-item"
+    *ngFor="let curso of cursos" routerLinkActive="active" [routerLink]="[curso['id']]">
+        {{curso.nome}}
+    </a>
+</div>
+
+<ul class="pagination">
+    <li class="waves-effect"><a (click)="setParamsPaggination(1)">1</a></li>
+    <li class="waves-effect"><a (click)="setParamsPaggination(2)">2</a></li>
+    <li class="waves-effect"><a (click)="setParamsPaggination(3)">3</a></li>
+    <li class="waves-effect"><a (click)="setParamsPaggination(4)">4</a></li>
+    <li class="waves-effect"><a (click)="setParamsPaggination(5)">5</a></li>
+  </ul>
+
+  <router-outlet></router-outlet> <!--Quando se usa rotas filhas se coloca o router-outlet no componente pai, para que as filhas sejam iniciadas dentro dele, não no appcomponent   -->
+
+        

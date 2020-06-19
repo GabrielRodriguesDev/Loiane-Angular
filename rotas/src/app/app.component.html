@@ -1,20 +1,15 @@
-<nav>
+<nav *ngIf="showMenu">
     <div class="nav-wrapper">
       <a routerLink='' class="brand-logo right">Routes</a>
       <ul id="nav-mobile" class="left hide-on-med-and-down">
         <li routerLinkActive="active"><a routerLink='/Login'>Login</a></li> <!--Para animação de "selecionado", é necessario usar a diretiva routerLink e colocar a propriedade Css disponibilizada pelo framework CSS como usado no exemplo usando o Materiallize-->
         <li routerLinkActive="active"><a routerLink='/Cursos'>Cursos</a></li>
-        <li routerLinkActive="active"><a routerLink='/Cursos'>Cursos ID</a></li>  
+        <li routerLinkActive="active"><a routerLink='/Alunos'>Alunos</a></li>
+
       </ul>
     </div>
 </nav>
 
 <div class="container">
-    <p>Entre com o Id do curso: </p>
-    iv class="row">
-        <div class="input-field col s12">
-          <input id="password" type="password" class="validate">
-          <label for="password">Password</label>
-        </div>
-    <router-outlet></router-outlet> <!-- Elemento que permite a troca de rotas e exibição delas -->
+  <router-outlet></router-outlet> <!-- Elemento que permite a troca de rotas e exibição delas -->
 </div>

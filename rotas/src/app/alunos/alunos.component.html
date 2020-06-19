@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="col s6">
+
+    <h5>
+        Lista de Alunos
+    </h5>
+    
+        <div class="collection">
+            <a href="#!" class="collection-item"
+            *ngFor="let aluno of alunos" [routerLink]="[aluno['id']]" routerLinkActive="active"> <!-- Como estamos usando rotas filhas não precisamos setar o caminho inteiro, e sim só o necessário pra chegar na rota a partir do ID, não sendo necessário colocar no array de parametro -> ['/alunos', aluno.id]-->
+            {{aluno['nome']}}  <!--Valor sendo recuperado entre chaves pois passei o tipo do array como object, para não dar erro é necessário recuperar o valor assim ao invés de "alunoç.id"-->
+            </a>
+        </div>
+    </div>
+    
+    <div class="col s6">    
+        <router-outlet></router-outlet>
+    </div>
+</div>
