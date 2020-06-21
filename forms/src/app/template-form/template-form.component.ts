@@ -22,4 +22,16 @@ export class TemplateFormComponent implements OnInit {
     console.log(this.user)
   }
 
+  //Formatting CSS
+  checksValidTouched(field){
+    return  !field.valid && field.touched //verifica se o campo é valido e foi tocado 
+  }
+
+  errorStyle(field){
+    return {
+      'was-validated': this.checksValidTouched(field) // A partir da verificação se a condição for verdadeira aplica uma formatação difeernte
+    }
+  }
+
+
 }
