@@ -12,6 +12,7 @@ import { pipe } from 'rxjs';
 })
 export class TemplateFormComponent implements OnInit {
 
+
   user: any = {
     name: null,
     email: null //'gabriel@onsist.com.br'
@@ -23,9 +24,9 @@ export class TemplateFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit(form){
-    console.log(form);
-    console.log(this.user)
+  onSubmit(form){//Efetuando uma simulação de uma subimissão ao um servidor, e pegando as respostas  (Url de teste: https://resttesttest.com/)
+    this.http.post('https://httpbin.org/post', JSON.stringify(form.value))
+    .subscribe(data => {console.log(data)})
   }
 
   //Formatting CSS
@@ -41,7 +42,6 @@ export class TemplateFormComponent implements OnInit {
 
   //Busca CEP
   CEPquery(cep, form){
-    console.log(cep);
 
    //Deixando o  "cep" somente com dígitos.
     cep = cep.replace(/\D/g,'');
@@ -59,6 +59,11 @@ export class TemplateFormComponent implements OnInit {
           this.http.get(`https://viacep.com.br/ws/${cep}/json`)
           .subscribe( data => {this.setValueForm(data, form)}
           )
+        }
+        else{
+          //Cep inválido
+          this.cleaningForm(form)
+          alert("CEP inválido")
         }
       }
   }
@@ -89,4 +94,19 @@ export class TemplateFormComponent implements OnInit {
       }
     })
   }
+
+  cleaningForm(forms){
+    forms.form.patchValue({
+        Endereco: { 
+          cep:"" ,
+          number:"" ,
+          street:"" ,
+          complemento:"" ,
+          neighborhood:"" ,
+          city:"" ,
+          state: "" 
+        }
+    })
+  }
+
 }
