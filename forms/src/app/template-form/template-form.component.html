@@ -34,7 +34,8 @@
         <div class="form-group col-md-3" [ngClass]="errorStyle(cep)">
           <label for="cep">CEP</label>
           <input type="text" class="form-control" id="cep"
-          name="cep" ngModel required #cep="ngModel">
+          name="cep" ngModel required #cep="ngModel"
+          (blur)="CEPquery($event.target.value)">
           <app-field-control-error 
             [showError]="checksValidTouched(cep)" 
             errorMessage="CEP">
