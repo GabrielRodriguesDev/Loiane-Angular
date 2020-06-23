@@ -1,5 +1,5 @@
 
-  <form [formGroup]="form"> <!-- A ligação entre o FormGroup instanciado no componente eo formulario no template de da pela diretiva FormGroup, onde referenciamos o grupo do formulario.-->
+  <form [formGroup]="form" (ngSubmit)="onSubmit()"> <!-- A ligação entre o FormGroup instanciado no componente eo formulario no template de da pela diretiva FormGroup, onde referenciamos o grupo do formulario.-->
       <div class="form-group" > 
         <div>
           <label for="name">Nome</label>
@@ -17,7 +17,7 @@
         </div>
         <div >
           <input type="email" class="form-control" name="email"
-          id="email" placeholder="name@email.com" formControlName="email" (blur)="changed()" > 
+          id="email" placeholder="name@email.com" formControlName="email"> 
         </div>
       </div> 
 
