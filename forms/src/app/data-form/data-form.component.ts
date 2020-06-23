@@ -10,7 +10,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class DataFormComponent implements OnInit {
 
-  form: FormGroup 
+  form: FormGroup;
+  erro: boolean = false
 
   constructor( 
     private formBuilder: FormBuilder,
@@ -31,11 +32,23 @@ export class DataFormComponent implements OnInit {
 
   onSubmit(){
     console.log(this.form)
-    this.httpClient.post('https://httpbin.org/post', JSON.stringify(this.form.value))//Transformando o valo passando em JSON. 
-    .subscribe(data => {console.log(data)})//Se inscrevendo no POST, e quando obter um "REPONSE" fazer um console log com oq foi retornado 
+    this.httpClient.post('https://htatpbin.org/post', JSON.stringify(this.form.value))//Transformando o valo passando em JSON. 
+    .subscribe(data => { //Se inscrevendo no POST, e quando obter um "REPONSE" fazer um console log com oq foi retornado 
+      console.log(data)
+      //Reset Form se não houver erro.
+      if(!this.erro){
+        this.resetForm()
+      }
+    },
+    (error: Error)=> {
+      this.erro = true;
+      alert("Erro ao enviar fórmulario")
+    });
   }
  
-
+  resetForm(){
+    this.form.reset()
+  }
 
 
 }
