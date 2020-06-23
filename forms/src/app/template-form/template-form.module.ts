@@ -2,21 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TemplateFormComponent } from './template-form.component';
-import { FormDebugComponent } from '../form-debug/form-debug.component';
-import { FieldControlErrorComponent } from './field-control-error/field-control-error.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
 @NgModule({
   declarations: [
-    TemplateFormComponent,
-    FieldControlErrorComponent,
-    FormDebugComponent,
+    TemplateFormComponent
 
   ],
   imports: [
     CommonModule,
     FormsModule, 
+    SharedModule
     
   ]
 })

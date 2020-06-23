@@ -1,0 +1,27 @@
+
+  <form [formGroup]="form"> <!-- A ligação entre o FormGroup instanciado no componente eo formulario no template de da pela diretiva FormGroup, onde referenciamos o grupo do formulario.-->
+      <div class="form-group" > 
+        <div>
+          <label for="name">Nome</label>
+        </div> 
+        <div >
+          <input type="text" class="form-control" name="name" 
+          id="name" placeholder="Nome" formControlName="name" > <!-- Para associar cada campo com um controle de grupo usamos a direitva FormControlName onde nela referenciamos o nome do controle de grupo setado no componente.-->
+          
+        </div> 
+      </div>
+  
+      <div class="form-group" > 
+        <div >
+          <label for="email">Email</label>
+        </div>
+        <div >
+          <input type="email" class="form-control" name="email"
+          id="email" placeholder="name@email.com" formControlName="email" (blur)="changed()" > 
+        </div>
+      </div> 
+
+      <button type="submit" class="btn btn-dark" >Enviar</button> 
+
+    <app-form-debug [form]="form"></app-form-debug>
+    </form>
