@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-data-form',
@@ -8,11 +8,14 @@ import { FormGroup } from '@angular/forms';
 })
 export class DataFormComponent implements OnInit {
 
-  form: FormGroup
+  form: FormGroup 
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.form = new FormGroup({ 
+      name: new FormControl('Gabriel')
+    })
   }
 
 }
