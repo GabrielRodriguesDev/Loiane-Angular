@@ -1,29 +1,116 @@
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()"> <!-- A ligação entre o FormGroup instanciado no componente eo formulario no template de da pela diretiva FormGroup, onde referenciamos o grupo do formulario.-->
-      <div class="form-group" > 
+      <div class="form-group"  [ngClass]="errorStyle('name')" > 
         <div>
           <label for="name">Nome</label>
         </div> 
         <div >
-          <input type="text" class="form-control" name="name" 
+          <input type="text" class="form-control"  name="name" 
           id="name" placeholder="Nome" formControlName="name" > <!-- Para associar cada campo com um controle de grupo usamos a direitva FormControlName onde nela referenciamos o nome do controle de grupo setado no componente.-->
-          
+          <app-field-control-error 
+          [showError]="!form.get('name').valid && form.controls['name'].touched"  
+          errorMessage="Nome é obrigatório"> <!--Como mostrado podemos fazer a validação no componente ou no template já que fazemos o porperty binding na variavel formgroup, acessamos o valor atraves do "get()", ou "controls" que da acesso ao objeto onde pegamos o dado.-->
+        </app-field-control-error> <!--Utilizando um componente externo para mostrar o erro.-->
         </div> 
       </div>
   
-      <div class="form-group" > 
+      <div class="form-group" [ngClass]="errorStyle('email')" > 
         <div >
           <label for="email">Email</label>
         </div>
         <div >
-          <input type="email" class="form-control" name="email"
-          id="email" placeholder="name@email.com" formControlName="email"> 
+          <input type="email" class="form-control was-validated" name="email"
+          id="email" placeholder="name@email.com" formControlName="email">
+          <app-field-control-error 
+          [showError]="checksValidTouched('email')" 
+          errorMessage="Email é obrigatorio">
+        </app-field-control-error>
+        <app-field-control-error 
+        [showError]="checkValidEmail()" 
+        errorMessage="Email invalido">
+      </app-field-control-error>
         </div>
       </div> 
 
+      <div> .<!--Agrupando dados Ngmodel-->
+        <div class="form-row">
+          <div class="form-group col-md-3" [ngClass]="errorStyle('cep')">
+            <label for="cep">CEP</label>
+            <input type="text" class="form-control" id="cep"
+            name="cep" formControlName="cep" >
+            <app-field-control-error 
+              [showError]="checksValidTouched('cep')" 
+              errorMessage="CEP">
+            </app-field-control-error>
+          </div>   
+  
+          <div class="form-group col-md-3" [ngClass]="errorStyle('number')">
+            <label for="number">Número</label>
+            <input type="text" class="form-control" id="numero"
+            name="number" formControlName="number">
+            <app-field-control-error 
+              [showError]="checksValidTouched('number')" 
+              errorMessage="Número">
+            </app-field-control-error> <!--Utilizando um componente externo para mostrar o erro.-->
+          </div>
+  
+          <div class="form-group col-md-6">
+            <label for="complemento">Complemento</label>
+            <input type="text" class="form-control" id="complemento"
+            name="complemento" formControlName="complemento">
+          </div>   
+        </div>
+  
+        <div class="form-group" [ngClass]="errorStyle('street')"> <!--Fazendo formatação de erros com CSS usando as  classes de forms do Angular (estados do angular sobre os campos : ng-touched & ng-unthouched - ng-dirty &  ng-pristine....), juntamente com classes do framwork CSS-->
+        <div>
+          <label for="rua">Rua</label>
+        </div> 
+            <div >
+              <input type="text" class="form-control"  id="street"  
+              name="street" formControlName="street">
+              <app-field-control-error 
+                [showError]="checksValidTouched('street')" 
+                errorMessage="Rua">
+              </app-field-control-error> <!--Utilizando um componente externo para mostrar o erro.-->
+            </div> 
+        </div>
+  
+        <div class="form-row ">
+          <div class="form-group col-md-5" [ngClass]="errorStyle('neighborhood')">
+            <label for="neighborhood">Bairro</label>
+            <input type="text" class="form-control" id="neighborhood"
+            name="neighborhood" formControlName="neighborhood" >
+              <app-field-control-error 
+                [showError]="checksValidTouched('neighborhood')" 
+                errorMessage="Bairro">
+              </app-field-control-error> <!--Utilizando um componente externo para mostrar o erro.-->
+          </div>  
+  
+          <div class="form-group col-md-4" [ngClass]="errorStyle('city')">
+            <label for="city">Cidade</label>
+            <input type="text" class="form-control" id="city"
+            name="city"  formControlName="city">
+              <app-field-control-error 
+                [showError]="checksValidTouched('city')" 
+                errorMessage="Cidade">
+              </app-field-control-error>  <!--Utilizando um componente externo para mostrar o erro.-->
+          </div>
+  
+          <div class="form-group col-md-3" [ngClass]="errorStyle('state')">
+            <label for="state">Estado</label>
+            <input type="text" class="form-control" id="state"
+            name="state" formControlName="state">
+              <app-field-control-error 
+                [showError]="checksValidTouched('state')" 
+                errorMessage="Estado">
+              </app-field-control-error> <!--Utilizando um componente externo para mostrar o erro.-->
+          </div>
+        </div>
+      </div>
+
       <button type="submit" class="btn btn-dark" >Enviar</button> 
-      <button  class="btn btn-default" (click)="resetForm()">Cancel</button> 
 
 
     <app-form-debug [form]="form"></app-form-debug>
+
     </form>
