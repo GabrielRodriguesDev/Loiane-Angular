@@ -38,7 +38,7 @@ export class DataFormComponent implements OnInit {
     })
   }
 
-  //Form
+  //Form Submit
   onSubmit(){
     this.httpClient.post('https://httpbin.org/post', JSON.stringify(this.form.value))//Transformando o valo passando em JSON. 
     .subscribe(data => { //Se inscrevendo no POST, e quando obter um "REPONSE" fazer um console log com oq foi retornado 
@@ -53,13 +53,12 @@ export class DataFormComponent implements OnInit {
       alert("Erro ao enviar fórmulario")
     });
   }
- 
+
   resetForm(){
     this.form.reset()
   }
 
   //Formatting CSS
-
   checkValidEmail(){
     let fielEmail = this.form.get('email')
     if(fielEmail.errors){
@@ -71,12 +70,63 @@ export class DataFormComponent implements OnInit {
     return !this.form.get(field).valid && this.form.get(field).touched // Verifica se o campo do válido de acordo com a condição passada; (Reactive forms já temos os dados no componente por isso é diferente do template drive)
   }
 
-
   errorStyle(field){
     return {
       'was-validated ': this.form.get(field).valid && this.form.get(field).touched
     }   
   }
 
+  //Query CEP
+
+  CEPquery(){
+    //Recuperando o valor do cep
+    let cep = this.form.get('address.cep').value
+     //Verificando se o campo, não está vazio 
+     if (cep != "") {
+      //Expressão regular para validar o CEP.
+      var validacep = /^[0-9]{8}$/;
+      //Valida o formato do CEP, de acordo com a expressão acima
+      if(validacep.test(cep)) {
+        //Buscando o CEP passado.
+        this.httpClient.get(`https://viacep.com.br/ws/${cep}/json`)
+        .subscribe( data => {this.setValueForm(data)}
+        )
+      }
+      else{
+        //Cep inválido
+        this.cleaningForm()
+        alert("CEP inválido")
+      }
+    }
+  }
+
+  setValueForm(data){
+    this.form.patchValue({//Usamos o patchValue() quando queremos alterar uma séria de valores (Varios campos), desde que esteja no form associado. 
+      address: {
+        cep: data.cep ,
+        street: data.logradouro,
+        complemento: data.complemento,
+        neighborhood: data.bairro,
+        city: data.localidade,
+        state: data.uf
+      }
+    })
+
+    this.form.get('name').setValue('Gabriel Silva')//Usamos o setValue() quando queremos setar um valor de apenas um campo do form.
+  }
+
+  cleaningForm(){
+    this.form.patchValue({
+      address: {
+        cep: null,
+        number: null,
+        street: null,
+        complemento: null,
+        neighborhood: null,
+        city: null,
+        state: null
+      }
+    })  
+  }
 
 }

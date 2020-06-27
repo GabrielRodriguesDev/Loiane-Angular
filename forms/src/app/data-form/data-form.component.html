@@ -37,7 +37,7 @@
           <div class="form-group col-md-3" [ngClass]="errorStyle('address.cep')"> <!--Como o dado está dentro do objeto "address temos que acessar de forma diferente o dado, pois o address é um objeto dentro do próprio form. (podemos acessar usando os gets ou controls)-->
             <label for="cep">CEP</label>
             <input type="text" class="form-control" id="cep"
-            name="cep" formControlName="cep" >
+            name="cep" formControlName="cep" (blur)="CEPquery()">
             <app-field-control-error 
               [showError]="checksValidTouched('address.cep')" 
               errorMessage="CEP">
