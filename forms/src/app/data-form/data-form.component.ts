@@ -26,13 +26,15 @@ export class DataFormComponent implements OnInit {
     this.form = this.formBuilder.group({ // Objeto de FormGroup  -> Grupo onde possui os controles individuais de cada form.
       name: [null, [Validators.required, Validators.minLength(3)]], //Todo o campo é um controle de grupo.
       email: [null, [Validators.required, Validators.email]], //Validação atráves do Validator (Forma de validação atráves do Reactive Forms), podemos ter mais de um validators, só precisa adicionar as validação dentro do array.    
-      cep: [null, Validators.required],
-      number: [null, Validators.required],
-      street: [null, Validators.required],
-      complemento: null,
-      neighborhood: [null, Validators.required],
-      city: [null, Validators.required],
-      state: [null, Validators.required],
+      address: this.formBuilder.group({
+        cep: [null, Validators.required],
+        number: [null, Validators.required],
+        street: [null, Validators.required],
+        complemento: null,
+        neighborhood: [null, Validators.required],
+        city: [null, Validators.required],
+        state: [null, Validators.required],
+      })
     })
   }
 
