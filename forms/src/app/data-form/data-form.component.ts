@@ -40,19 +40,38 @@ export class DataFormComponent implements OnInit {
 
   //Form Submit
   onSubmit(){
-    this.httpClient.post('https://httpbin.org/post', JSON.stringify(this.form.value))//Transformando o valo passando em JSON. 
-    .subscribe(data => { //Se inscrevendo no POST, e quando obter um "REPONSE" fazer um console log com oq foi retornado 
-      console.log(data)
-      //Reset Form se não houver erro.
-      if(!this.erro){
-        this.resetForm()
+    if(this.form.valid){
+
+      this.httpClient.post('https://httpbin.org/post', JSON.stringify(this.form.value))//Transformando o valo passando em JSON. 
+      .subscribe(data => { //Se inscrevendo no POST, e quando obter um "REPONSE" fazer um console log com oq foi retornado 
+        console.log(data)
+        //Reset Form se não houver erro.
+        if(!this.erro){
+          this.resetForm()
+        }
+      },
+      (error: Error)=> {//Recebendo o erro e usando para a logica do IF acima.
+        this.erro = true;
+        alert("Erro ao enviar fórmulario")
+      });
+    } else { //Caso o form não seja valido, troca os campos para touched e aplica o stylo de erro que é acionado quando o campo é touched
+      this.checkFormValidation(this.form)//Passando o proprio form para analisar o objeto
+    }
+
+  }
+
+  checkFormValidation(form: FormGroup){
+    Object.keys(form.controls).forEach(key => {// Object key retorna os key values de cada objeto. 
+      console.log(key);// Será retornado os values key do objeto form (Os values keys aninhados (valores do endereco) não vão ser retornado por essa function)
+      const control = form.get(key);//Pegando o value key do formulario
+      control.markAsTouched();//Aplicando a classe de touched para a mudança de estilo
+      if(control instanceof FormGroup) { //Verificando se alguma value key é um FormGroup (Um objeto aninhado)
+        this.checkFormValidation(control) //Caso seja passa sobre a validação, pois o Object key não pega aninhados, portanto é necessario fazer uma "apropriação"
       }
-    },
-    (error: Error)=> {//Recebendo o erro e usando para a logica do IF acima.
-      this.erro = true;
-      alert("Erro ao enviar fórmulario")
     });
   }
+
+
 
   resetForm(){
     this.form.reset()
