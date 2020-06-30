@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { DropdownService } from '../shared/services/dropdown.service'
+import { StatesBr } from '../shared/models/states-br';
 
 @Component({
   selector: 'app-data-form',
@@ -12,12 +14,19 @@ export class DataFormComponent implements OnInit {
   form: FormGroup;
   erro: boolean = false
 
+  states: StatesBr[]
+
   constructor( 
     private formBuilder: FormBuilder,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private dropdownService: DropdownService
     ) { }
 
   ngOnInit() {
+
+   this.dropdownService.getStatesBr()
+   .subscribe((states: StatesBr[]) => {this.states = states; console.log(states)})
+
     /*this.form = new FormGroup({ 
       name: new FormControl('Gabriel'),
       email: new FormControl()
@@ -41,7 +50,6 @@ export class DataFormComponent implements OnInit {
   //Form Submit
   onSubmit(){
     if(this.form.valid){
-
       this.httpClient.post('https://httpbin.org/post', JSON.stringify(this.form.value))//Transformando o valo passando em JSON. 
       .subscribe(data => { //Se inscrevendo no POST, e quando obter um "REPONSE" fazer um console log com oq foi retornado 
         console.log(data)
@@ -50,7 +58,7 @@ export class DataFormComponent implements OnInit {
           this.resetForm()
         }
       },
-      (error: Error)=> {//Recebendo o erro e usando para a logica do IF acima.
+      (error: Error)=> {//Recebendo o erro e usado para a logica do IF acima.
         this.erro = true;
         alert("Erro ao enviar fórmulario")
       });

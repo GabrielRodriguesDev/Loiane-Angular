@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TemplateFormComponent } from './template-form.component';
 import { SharedModule } from '../shared/shared.module';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 
@@ -13,8 +14,10 @@ import { SharedModule } from '../shared/shared.module';
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
     FormsModule, 
     SharedModule
+    
     
   ]
 })
