@@ -4,6 +4,7 @@ import { FormDebugComponent } from './form-debug/form-debug.component';
 import { FieldControlErrorComponent } from './field-control-error/field-control-error.component';
 import { DropdownService } from './services/dropdown.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { QueryCepService } from './services/query-cep.service';
 
 
 
@@ -22,7 +23,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     FieldControlErrorComponent
   ],
   providers: [
-    DropdownService
+
   ]
 })
 export class SharedModule { }

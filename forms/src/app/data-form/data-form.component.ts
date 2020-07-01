@@ -3,6 +3,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { HttpClient } from '@angular/common/http';
 import { DropdownService } from '../shared/services/dropdown.service'
 import { StatesBr } from '../shared/models/states-br';
+import { QueryCepService } from '../shared/services/query-cep.service';
 
 @Component({
   selector: 'app-data-form',
@@ -19,6 +20,7 @@ export class DataFormComponent implements OnInit {
   constructor( 
     private formBuilder: FormBuilder,
     private httpClient: HttpClient,
+    private queryCep: QueryCepService,
     private dropdownService: DropdownService
     ) { }
 
@@ -65,9 +67,9 @@ export class DataFormComponent implements OnInit {
     } else { //Caso o form não seja valido, troca os campos para touched e aplica o stylo de erro que é acionado quando o campo é touched
       this.checkFormValidation(this.form)//Passando o proprio form para analisar o objeto
     }
-
   }
 
+  //Valid Form
   checkFormValidation(form: FormGroup){
     Object.keys(form.controls).forEach(key => {// Object key retorna os key values de cada objeto. 
       console.log(key);// Será retornado os values key do objeto form (Os values keys aninhados (valores do endereco) não vão ser retornado por essa function)
@@ -78,8 +80,6 @@ export class DataFormComponent implements OnInit {
       }
     });
   }
-
-
 
   resetForm(){
     this.form.reset()
@@ -104,28 +104,18 @@ export class DataFormComponent implements OnInit {
   }
 
   //Query CEP
-
-  CEPquery(){
+  cep(){
     //Recuperando o valor do cep
     let cep = this.form.get('address.cep').value
-     //Verificando se o campo, não está vazio 
-     if (cep != "") {
-      //Expressão regular para validar o CEP.
-      var validacep = /^[0-9]{8}$/;
-      //Valida o formato do CEP, de acordo com a expressão acima
-      if(validacep.test(cep)) {
-        //Buscando o CEP passado.
-        this.httpClient.get(`https://viacep.com.br/ws/${cep}/json`)
-        .subscribe( data => {this.setValueForm(data)}
-        )
-      }
-      else{
-        //Cep inválido
-        this.cleaningForm()
-        alert("CEP inválido")
-      }
+    if(cep != null && cep !== ''){
+      this.queryCep.queryCep(cep)
+      .subscribe(data => {this.setValueForm(data)})
+    } else {
+      this.cleaningForm();
+      alert('CEP invalid')
     }
   }
+
 
   setValueForm(data){
     this.form.patchValue({//Usamos o patchValue() quando queremos alterar uma séria de valores (Varios campos), desde que esteja no form associado. 
@@ -137,9 +127,13 @@ export class DataFormComponent implements OnInit {
         city: data.localidade,
         state: data.uf
       }
+    });
+    Object.keys(this.form.controls).forEach(key => {//Fazendo um forEach nos controles 
+      const control = this.form.get(key);//Passando o controle para a variavel
+      if(control instanceof FormGroup){//Se o control for uma instacia de FormGroup
+        control.markAllAsTouched()//Marca o campo como tocado (Alterando o style)
+      }      
     })
-
-    this.form.get('name').setValue('Gabriel Silva')//Usamos o setValue() quando queremos setar um valor de apenas um campo do form.
   }
 
   cleaningForm(){
