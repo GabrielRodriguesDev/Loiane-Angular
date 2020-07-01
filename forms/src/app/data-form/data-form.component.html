@@ -98,8 +98,13 @@
   
           <div class="form-group col-md-3" [ngClass]="errorStyle('address.state')">
             <label for="state">Estado</label>
-            <input type="text" class="form-control" id="state"
+            <select type="text" class="form-control" id="state"
             name="state" formControlName="state">
+            <option *ngFor="let state of states | async as list" [value]="state.sigla"> <!--Usando o pipe async para ele poder recuperar os valores do Observale e cuidar das inscrilções e desinscrições-->
+              <!--Linkando a sigla como valor do campo pois quando fazemos a busca pelo CEP oque nós é retornardo é a sigla, portanto já faz a alteração automatica. (Property Binding)-->
+              {{state.nome}}
+            </option>
+          </select>
               <app-field-control-error 
                 [showError]="checksValidTouched('address.state')" 
                 errorMessage="Estado">

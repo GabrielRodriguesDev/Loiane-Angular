@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { StatesBr } from '../models/states-br';
 
 
 @Injectable({
@@ -14,7 +16,7 @@ export class DropdownService {
     private httpClient: HttpClient
   ) { }
 
-  getStatesBr() {
-    return this.httpClient.get(this.url)
+  getStatesBr(): Observable<StatesBr> {
+    return this.httpClient.get<StatesBr>(this.url)
   }
 }

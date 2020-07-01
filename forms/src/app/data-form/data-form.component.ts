@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { DropdownService } from '../shared/services/dropdown.service'
 import { StatesBr } from '../shared/models/states-br';
 import { QueryCepService } from '../shared/services/query-cep.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-data-form',
@@ -14,8 +15,8 @@ export class DataFormComponent implements OnInit {
 
   form: FormGroup;
   erro: boolean = false
-
-  states: StatesBr[]
+  //states: StatesBr[]
+  states: Observable<{}>;
 
   constructor( 
     private formBuilder: FormBuilder,
@@ -26,10 +27,12 @@ export class DataFormComponent implements OnInit {
 
   ngOnInit() {
 
-   this.dropdownService.getStatesBr()
-   .subscribe((states: StatesBr[]) => {this.states = states; console.log(states)})
+    this.states = this.dropdownService.getStatesBr();//Usando o Observable com o pipe async, não é necessario fazer inscrição pois o pipe cuida de se inscrever e desinscrever quando necessario
 
-    /*this.form = new FormGroup({ 
+   /*this.dropdownService.getStatesBr()
+   .subscribe((states: StatesBr[]) => {this.states = states; console.log(states)})*/ //Dessa forma pode não haver a desinscrição da chamada e da estouro de memoria (aconselhavel usar o pipe async)
+   
+   /*this.form = new FormGroup({ 
       name: new FormControl('Gabriel'),
       email: new FormControl()
     })*/ //Forma mais verbosa de iniciar um Data-Form.
@@ -54,7 +57,6 @@ export class DataFormComponent implements OnInit {
     if(this.form.valid){
       this.httpClient.post('https://httpbin.org/post', JSON.stringify(this.form.value))//Transformando o valo passando em JSON. 
       .subscribe(data => { //Se inscrevendo no POST, e quando obter um "REPONSE" fazer um console log com oq foi retornado 
-        console.log(data)
         //Reset Form se não houver erro.
         if(!this.erro){
           this.resetForm()
@@ -72,7 +74,7 @@ export class DataFormComponent implements OnInit {
   //Valid Form
   checkFormValidation(form: FormGroup){
     Object.keys(form.controls).forEach(key => {// Object key retorna os key values de cada objeto. 
-      console.log(key);// Será retornado os values key do objeto form (Os values keys aninhados (valores do endereco) não vão ser retornado por essa function)
+      // Será retornado os values key do objeto form (Os values keys aninhados (valores do endereco) não vão ser retornado por essa function)
       const control = form.get(key);//Pegando o value key do formulario
       control.markAsTouched();//Aplicando a classe de touched para a mudança de estilo
       if(control instanceof FormGroup) { //Verificando se alguma value key é um FormGroup (Um objeto aninhado)
