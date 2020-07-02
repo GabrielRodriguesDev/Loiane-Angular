@@ -17,6 +17,7 @@ export class DataFormComponent implements OnInit {
   erro: boolean = false
   //states: StatesBr[]
   states: Observable<{}>;
+  posts: any[];
 
   constructor( 
     private formBuilder: FormBuilder,
@@ -28,7 +29,7 @@ export class DataFormComponent implements OnInit {
   ngOnInit() {
 
     this.states = this.dropdownService.getStatesBr();//Usando o Observable com o pipe async, não é necessario fazer inscrição pois o pipe cuida de se inscrever e desinscrever quando necessario
-
+    this.posts = this.dropdownService.getPosts();
    /*this.dropdownService.getStatesBr()
    .subscribe((states: StatesBr[]) => {this.states = states; console.log(states)})*/ //Dessa forma pode não haver a desinscrição da chamada e da estouro de memoria (aconselhavel usar o pipe async)
    
@@ -48,7 +49,8 @@ export class DataFormComponent implements OnInit {
         neighborhood: [null, Validators.required],
         city: [null, Validators.required],
         state: [null, Validators.required],
-      })
+      }),
+      posts: [null]
     })
   }
 
@@ -150,6 +152,14 @@ export class DataFormComponent implements OnInit {
         state: null
       }
     })  
+  }
+
+  setPosts(){
+    const posts = { nome: 'Dev', nivel:'Pleno', desc:'Dev Pl' };
+    this.form.get('posts').setValue(posts)
+  }
+  comparePosts(objOne, objTwo){
+    return objOne && objTwo ? (objOne.nome === objTwo.nome && objOne.nivel && objTwo.nivel) : objOne && objTwo  ;
   }
 
 }

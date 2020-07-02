@@ -99,21 +99,37 @@
           <div class="form-group col-md-3" [ngClass]="errorStyle('address.state')">
             <label for="state">Estado</label>
             <select type="text" class="form-control" id="state"
-            name="state" formControlName="state">
-            <option *ngFor="let state of states | async as list" [value]="state.sigla"> <!--Usando o pipe async para ele poder recuperar os valores do Observale e cuidar das inscrilções e desinscrições-->
-              <!--Linkando a sigla como valor do campo pois quando fazemos a busca pelo CEP oque nós é retornardo é a sigla, portanto já faz a alteração automatica. (Property Binding)-->
-              {{state.nome}}
-            </option>
-          </select>
-              <app-field-control-error 
-                [showError]="checksValidTouched('address.state')" 
-                errorMessage="Estado">
-              </app-field-control-error> <!--Utilizando um componente externo para mostrar o erro.-->
+              name="state" formControlName="state">
+              <option *ngFor="let state of states | async as list" [value]="state.sigla"> <!--Usando o pipe async para ele poder recuperar os valores do Observale e cuidar das inscrilções e desinscrições-->
+                <!--Linkando a sigla como valor do campo pois quando fazemos a busca pelo CEP oque nós é retornardo é a sigla, portanto já faz a alteração automatica. (Property Binding)-->
+                {{state.nome}}
+              </option>
+            </select>
+            <app-field-control-error 
+              [showError]="checksValidTouched('address.state')" 
+              errorMessage="Estado">
+            </app-field-control-error> <!--Utilizando um componente externo para mostrar o erro.-->
           </div>
         </div>
       </div>
 
+      <div class="form-group">
+        <label for="posts">Cargo</label>
+        <select type="text" class="form-control" id="posts"
+          name="posts" formControlName="posts" [compareWith]="comparePosts"> <!--Usando o compareWith que compara dois valores e retorna se são iguais ou não. (Para validar o valor do select)-->
+          <option *ngFor="let post of posts" [ngValue]="post"> <!--Usando o ngValue para ter a ligação com o select-->
+            {{post.desc}}
+          </option>
+        </select>
+        <app-field-control-error 
+          [showError]="checksValidTouched('posts')" 
+          errorMessage="Cargo">
+        </app-field-control-error> <!--Utilizando um componente externo para mostrar o erro.-->
+      </div>
+
       <button type="submit" class="btn btn-dark">Enviar</button> 
+      <button class="btn btn-dark" (click)="setPosts()">Cargo</button> 
+
 
 
     <app-form-debug [form]="form"></app-form-debug>

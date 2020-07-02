@@ -19,4 +19,12 @@ export class DropdownService {
   getStatesBr(): Observable<StatesBr> {
     return this.httpClient.get<StatesBr>(this.url)
   }
+
+  getPosts(){
+    return [
+      { nome: 'Dev', nivel:'Junior', desc:'Dev Jr' },
+      { nome: 'Dev', nivel:'Pleno', desc:'Dev Pl' },
+      { nome: 'Dev', nivel:'Senior', desc:'Dev Sr' }
+    ]
+  }
 }
