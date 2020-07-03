@@ -121,14 +121,21 @@
             {{post.desc}}
           </option>
         </select>
-        <app-field-control-error 
-          [showError]="checksValidTouched('posts')" 
-          errorMessage="Cargo">
-        </app-field-control-error> <!--Utilizando um componente externo para mostrar o erro.-->
+      </div>
+
+      <div class="form-group">
+        <label for="technology">Técnologia</label>
+        <select multiple type="text" class="form-control" id="technology"
+          name="technology" formControlName="technologys"> <!--/Trabalhando com o ComboBox multiple-->
+          <option  *ngFor="let technology of technologys" [value]="technology.nome"> <!--/Trabalhando com o ComboBox multiple-->
+            {{technology.desc}}
+          </option>
+        </select>
       </div>
 
       <button type="submit" class="btn btn-dark">Enviar</button> 
-      <button class="btn btn-dark" (click)="setPosts()">Cargo</button> 
+      <button class="btn btn-dark" (click)="setPosts()">Cargo</button>
+      <button class="btn btn-info" (click)="setTechnology()">Technology</button> 
 
 
 

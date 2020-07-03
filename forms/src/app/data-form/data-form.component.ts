@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { DropdownService } from '../shared/services/dropdown.service'
-import { StatesBr } from '../shared/models/states-br';
 import { QueryCepService } from '../shared/services/query-cep.service';
 import { Observable } from 'rxjs';
 
@@ -18,6 +17,7 @@ export class DataFormComponent implements OnInit {
   //states: StatesBr[]
   states: Observable<{}>;
   posts: any[];
+  technologys: any[];
 
   constructor( 
     private formBuilder: FormBuilder,
@@ -30,6 +30,7 @@ export class DataFormComponent implements OnInit {
 
     this.states = this.dropdownService.getStatesBr();//Usando o Observable com o pipe async, não é necessario fazer inscrição pois o pipe cuida de se inscrever e desinscrever quando necessario
     this.posts = this.dropdownService.getPosts();
+    this.technologys = this.dropdownService.getTechnologys();
    /*this.dropdownService.getStatesBr()
    .subscribe((states: StatesBr[]) => {this.states = states; console.log(states)})*/ //Dessa forma pode não haver a desinscrição da chamada e da estouro de memoria (aconselhavel usar o pipe async)
    
@@ -50,7 +51,8 @@ export class DataFormComponent implements OnInit {
         city: [null, Validators.required],
         state: [null, Validators.required],
       }),
-      posts: [null]
+      posts: [null],
+      technologys: [null]
     })
   }
 
@@ -158,8 +160,12 @@ export class DataFormComponent implements OnInit {
     const posts = { nome: 'Dev', nivel:'Pleno', desc:'Dev Pl' };
     this.form.get('posts').setValue(posts)
   }
-  comparePosts(objOne, objTwo){
+  comparePosts(objOne, objTwo){//Metodo a ser usado com o compareWith (Que compara dois valores)
     return objOne && objTwo ? (objOne.nome === objTwo.nome && objOne.nivel && objTwo.nivel) : objOne && objTwo  ;
+  }
+
+  setTechnology(){
+    this.form.get('technologys').setValue(['Java','JavaScript']) //Trabalhando com o ComboBox multiple
   }
 
 }
