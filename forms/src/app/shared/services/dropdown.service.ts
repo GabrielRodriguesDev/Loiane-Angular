@@ -36,4 +36,11 @@ export class DropdownService {
       { nome: 'NodeJS', desc: 'NodeJS'}
     ]
   }
+
+  getNewsLetter(){
+    return [
+      { valor: 's', desc:'Sim' },
+      { valor: 'n', desc:'Não' }
+    ]
+  }
 }

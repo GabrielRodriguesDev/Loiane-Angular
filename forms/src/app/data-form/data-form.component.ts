@@ -18,6 +18,7 @@ export class DataFormComponent implements OnInit {
   states: Observable<{}>;
   posts: any[];
   technologys: any[];
+  newsletterOp: any[];
 
   constructor( 
     private formBuilder: FormBuilder,
@@ -31,6 +32,7 @@ export class DataFormComponent implements OnInit {
     this.states = this.dropdownService.getStatesBr();//Usando o Observable com o pipe async, não é necessario fazer inscrição pois o pipe cuida de se inscrever e desinscrever quando necessario
     this.posts = this.dropdownService.getPosts();
     this.technologys = this.dropdownService.getTechnologys();
+    this.newsletterOp = this.dropdownService.getNewsLetter();
    /*this.dropdownService.getStatesBr()
    .subscribe((states: StatesBr[]) => {this.states = states; console.log(states)})*/ //Dessa forma pode não haver a desinscrição da chamada e da estouro de memoria (aconselhavel usar o pipe async)
    
@@ -52,7 +54,8 @@ export class DataFormComponent implements OnInit {
         state: [null, Validators.required],
       }),
       posts: [null],
-      technologys: [null]
+      technologys: [null],
+      newsletter: ['s']//Valor padrão
     })
   }
 

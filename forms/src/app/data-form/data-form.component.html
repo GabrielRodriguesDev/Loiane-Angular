@@ -113,6 +113,7 @@
         </div>
       </div>
 
+      <!--Combox-->
       <div class="form-group">
         <label for="posts">Cargo</label>
         <select type="text" class="form-control" id="posts"
@@ -123,6 +124,7 @@
         </select>
       </div>
 
+      <!--Combox - Multiple-->
       <div class="form-group">
         <label for="technology">Técnologia</label>
         <select multiple type="text" class="form-control" id="technology"
@@ -131,6 +133,15 @@
             {{technology.desc}}
           </option>
         </select>
+      </div>
+
+      <!--Radio Button-->
+      <div>
+        <label><strong>NewsLetter</strong></label>
+      </div>
+      <div class="custom-control custom-radio" *ngFor="let item of newsletterOp">
+        <input type="radio" id={{item.desc}} class="custom-control-input" formControlName="newsletter" [value]="item.valor">
+        <label class="custom-control-label" for={{item.desc}}>{{item.desc}}</label>
       </div>
 
       <button type="submit" class="btn btn-dark">Enviar</button> 
