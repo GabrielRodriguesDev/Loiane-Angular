@@ -55,7 +55,8 @@ export class DataFormComponent implements OnInit {
       }),
       posts: [null],
       technologys: [null],
-      newsletter: ['s']//Valor padrão
+      newsletter: ['s'],//Valor padrão
+      terms: [null, Validators.pattern('true')]//Validando uma expressão regular. 
     })
   }
 

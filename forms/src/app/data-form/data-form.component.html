@@ -144,6 +144,20 @@
         <label class="custom-control-label" for={{item.desc}}>{{item.desc}}</label>
       </div>
 
+      <br>
+
+      <!--Check Box Toggle-->
+      <div>
+        <label><strong>Terms</strong></label>
+      </div>
+      <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" id="terms" formControlName="terms" 
+   [ngClass]="{'is-invalid': !form.get('terms').valid }">
+        <label class="custom-control-label" for="terms">I accept the terms</label>
+      </div>
+
+      <br>
+
       <button type="submit" class="btn btn-dark">Enviar</button> 
       <button class="btn btn-dark" (click)="setPosts()">Cargo</button>
       <button class="btn btn-info" (click)="setTechnology()">Technology</button> 
