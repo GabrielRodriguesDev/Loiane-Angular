@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { DropdownService } from '../shared/services/dropdown.service'
 import { QueryCepService } from '../shared/services/query-cep.service';
 import { Observable } from 'rxjs';
+import { FormValidations } from '../shared/form-validation';
 
 @Component({
   selector: 'app-data-form',
@@ -45,7 +46,7 @@ export class DataFormComponent implements OnInit {
       name: [null, [Validators.required, Validators.minLength(3)]], //Todo o campo é um controle de grupo.
       email: [null, [Validators.required, Validators.email]], //Validação atráves do Validator (Forma de validação atráves do Reactive Forms), podemos ter mais de um validators, só precisa adicionar as validação dentro do array.    
       address: this.formBuilder.group({
-        cep: [null, Validators.required],
+        cep: [null, Validators.required], //Aqui teria a validação de campo cep, porém está executando erro. (FormValidation.cepValidator)
         number: [null, Validators.required],
         street: [null, Validators.required],
         complemento: null,
@@ -174,4 +175,5 @@ export class DataFormComponent implements OnInit {
     this.form.get('technologys').setValue(['Java','JavaScript']) //Trabalhando com o ComboBox multiple
   }
 
+ 
 }

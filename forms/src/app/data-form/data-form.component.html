@@ -42,6 +42,10 @@
               [showError]="checksValidTouched('address.cep')" 
               errorMessage="CEP">
             </app-field-control-error>
+            <app-field-control-error 
+            [showError]="form.get('address.cep').hasError('cepInvalid')" 
+            errorMessage="CEP">
+          </app-field-control-error>
           </div>   
   
           <div class="form-group col-md-3" [ngClass]="errorStyle('address.number')">
