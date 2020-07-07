@@ -30,9 +30,9 @@ export class DropdownService {
 
   getTechnologys(){
     return [
-      { nome: 'Angular', desc: 'Java' },
-      { nome: 'React', desc: 'React'},
-      { nome: 'Vue', desc: 'Vue'},
+      { nome: 'Java', desc: 'Java' },
+      { nome: 'Ruby', desc: 'Ruby'},
+      { nome: 'C++', desc: 'C++'},
       { nome: 'NodeJS', desc: 'NodeJS'}
     ]
   }

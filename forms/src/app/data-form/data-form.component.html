@@ -152,7 +152,7 @@
       </div>
       <div class="custom-control custom-checkbox">
         <input type="checkbox" class="custom-control-input" id="terms" formControlName="terms" 
-   [ngClass]="{'is-invalid': !form.get('terms').valid }">
+        [ngClass]="{'is-invalid': !form.get('terms').valid && form.get('terms').touched }">
         <label class="custom-control-label" for="terms">I accept the terms</label>
       </div>
 

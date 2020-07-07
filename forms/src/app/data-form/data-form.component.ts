@@ -56,9 +56,11 @@ export class DataFormComponent implements OnInit {
       posts: [null],
       technologys: [null],
       newsletter: ['s'],//Valor padrão
-      terms: [null, Validators.pattern('true')]//Validando uma expressão regular. 
+      terms: [null, Validators.pattern('true')],//Validando uma expressão regular. 
     })
   }
+
+
 
   //Form Submit
   onSubmit(){
@@ -82,7 +84,7 @@ export class DataFormComponent implements OnInit {
   //Valid Form
   checkFormValidation(form: FormGroup){
     Object.keys(form.controls).forEach(key => {// Object key retorna os key values de cada objeto. 
-      // Será retornado os values key do objeto form (Os values keys aninhados (valores do endereco) não vão ser retornado por essa function)
+      console.log(key)// Será retornado os values key do objeto form (Os values keys aninhados (valores do endereco) não vão ser retornado por essa function)
       const control = form.get(key);//Pegando o value key do formulario
       control.markAsTouched();//Aplicando a classe de touched para a mudança de estilo
       if(control instanceof FormGroup) { //Verificando se alguma value key é um FormGroup (Um objeto aninhado)
