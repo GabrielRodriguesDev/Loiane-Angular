@@ -45,9 +45,10 @@ export class DataFormComponent implements OnInit {
     this.form = this.formBuilder.group({ // Objeto de FormGroup  -> Grupo onde possui os controles individuais de cada form.
       name: [null, [Validators.required, Validators.minLength(3)]], //Todo o campo é um controle de grupo.
       email: [null, [Validators.required, Validators.email]], //Validação atráves do Validator (Forma de validação atráves do Reactive Forms), podemos ter mais de um validators, só precisa adicionar as validação dentro do array.    
+      confirmEmail: [null],//Aqui teria a validação entre dois campos por uma função que está sendo puxada do FormValidation
       address: this.formBuilder.group({
         cep: [null, Validators.required], //Aqui teria a validação de campo cep, porém está executando erro. (FormValidation.cepValidator)
-        number: [null, Validators.required],
+        number: [null, Validators.required],  
         street: [null, Validators.required],
         complemento: null,
         neighborhood: [null, Validators.required],
@@ -100,9 +101,9 @@ export class DataFormComponent implements OnInit {
 
   //Formatting CSS
   checkValidEmail(){
-    let fielEmail = this.form.get('email')
-    if(fielEmail.errors){
-      return fielEmail.errors['email'] && fielEmail.touched
+    let fieldEmail = this.form.get('email')
+    if(fieldEmail.errors){
+      return fieldEmail.errors['email'] && fieldEmail.touched
     }
   }
 
@@ -112,7 +113,7 @@ export class DataFormComponent implements OnInit {
 
   errorStyle(field){
     return {
-      'was-validated ': this.form.get(field).valid && this.form.get(field).touched
+      'was-validated': this.form.get(field).valid && this.form.get(field).touched
     }   
   }
 

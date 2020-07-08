@@ -1,4 +1,4 @@
-import { FormControl } from '@angular/forms';
+import { FormControl, FormArray, FormGroup } from '@angular/forms';
 
 export class FormValidations {
 
@@ -9,5 +9,27 @@ export class FormValidations {
         return validacep.test(cep) ? null : { cepInvalid : true };//Testa a expressão regular, se for true retorna null se for false retorna o objeto de erro  com true
         }
         return null
+    }
+
+
+    static equalsTo(otherField: string){
+        const validator = (control : FormControl) => {
+            if(otherField == null) {
+                throw new Error('É necessário informar um campo. ');
+            }
+            console.log(<FormGroup>control.root)
+            
+            if(!control.root || (<FormGroup>control.root).controls){
+                return null
+            }
+            const field = (<FormGroup>control.root).get(otherField);
+            if(!field){
+                throw new Error('É necessário informar um campo válido. ')
+            }
+            if(field.value !== control.value){
+                return { esqualsTo : otherField}
+            }
+        };
+        return validator;
     }
 }
