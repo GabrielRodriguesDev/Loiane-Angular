@@ -25,10 +25,18 @@
           [showError]="checksValidTouched('email')" 
           errorMessage="Email é obrigatorio">
         </app-field-control-error>
-        <app-field-control-error 
+      <app-field-control-error 
         [showError]="checkValidEmail()" 
         errorMessage="Email invalido">
       </app-field-control-error>
+      <app-field-control-error 
+      [showError]="form.get('email').status === 'PENDING'" 
+      errorMessage="Validando e-mail"> <!--validações assincronas-->
+    </app-field-control-error>
+    <app-field-control-error 
+    [showError]="form.get('email').hasError('emailInvalido')" 
+    errorMessage="E-mail já cadastrado"> <!--validações assincronas-->
+  </app-field-control-error>
         </div>
       </div>
       

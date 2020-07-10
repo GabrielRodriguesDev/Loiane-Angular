@@ -4,7 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { DropdownService } from '../shared/services/dropdown.service'
 import { QueryCepService } from '../shared/services/query-cep.service';
 import { Observable } from 'rxjs';
-import { FormValidations } from '../shared/form-validation';
+import { map } from 'rxjs/operators'
+import { VerificaEmailService } from './services/verifica-email.service';
 
 @Component({
   selector: 'app-data-form',
@@ -25,10 +26,13 @@ export class DataFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private httpClient: HttpClient,
     private queryCep: QueryCepService,
-    private dropdownService: DropdownService
+    private dropdownService: DropdownService,
+    private verificaEmailService: VerificaEmailService
     ) { }
 
   ngOnInit() {
+  
+    //this.verificaEmailService.vericaEmail('email1@email.com').subscribe()
 
     this.states = this.dropdownService.getStatesBr();//Usando o Observable com o pipe async, não é necessario fazer inscrição pois o pipe cuida de se inscrever e desinscrever quando necessario
     this.posts = this.dropdownService.getPosts();
@@ -44,7 +48,7 @@ export class DataFormComponent implements OnInit {
 
     this.form = this.formBuilder.group({ // Objeto de FormGroup  -> Grupo onde possui os controles individuais de cada form.
       name: [null, [Validators.required, Validators.minLength(3)]], //Todo o campo é um controle de grupo.
-      email: [null, [Validators.required, Validators.email]], //Validação atráves do Validator (Forma de validação atráves do Reactive Forms), podemos ter mais de um validators, só precisa adicionar as validação dentro do array.    
+      email: [null, [Validators.required, Validators.email], this.validarEmail.bind(this)], //Validação atráves do Validator (Forma de validação atráves do Reactive Forms), podemos ter mais de um validators, só precisa adicionar as validação dentro do array.    
       confirmEmail: [null],//Aqui teria a validação entre dois campos por uma função que está sendo puxada do FormValidation
       address: this.formBuilder.group({
         cep: [null, Validators.required], //Aqui teria a validação de campo cep, porém está executando erro. (FormValidation.cepValidator)
@@ -176,5 +180,8 @@ export class DataFormComponent implements OnInit {
     this.form.get('technologys').setValue(['Java','JavaScript']) //Trabalhando com o ComboBox multiple
   }
 
- 
+  validarEmail( formControl: FormControl){
+   return this.verificaEmailService.vericaEmail(formControl.value)
+   .pipe(map(emailExiste => emailExiste ? {emailInvalido: true} : null))// Mapeando a resposta para retornar true se já existir o e-mail passado no parametro do formControl
+ }
 }
