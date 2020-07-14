@@ -7,10 +7,10 @@
         <div >
           <input type="text" class="form-control"  name="name" 
           id="name" placeholder="Nome" formControlName="name" > <!-- Para associar cada campo com um controle de grupo usamos a direitva FormControlName onde nela referenciamos o nome do controle de grupo setado no componente.-->
-          <app-field-control-error 
+          <app-error-message 
           [showError]="!form.get('name').valid && form.controls['name'].touched"  
           errorMessage="Nome é obrigatório"> <!--Como mostrado podemos fazer a validação no componente ou no template já que fazemos o porperty binding na variavel formgroup, acessamos o valor atraves do "get()", ou "controls" que da acesso ao objeto onde pegamos o dado.-->
-        </app-field-control-error> <!--Utilizando um componente externo para mostrar o erro.-->
+        </app-error-message> <!--Utilizando um componente externo para mostrar o erro.-->
         </div> 
       </div>
   

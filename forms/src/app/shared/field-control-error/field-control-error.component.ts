@@ -9,7 +9,6 @@ export class FieldControlErrorComponent implements OnInit {
 
   @Input() 
   showError: boolean;
-
   @Input()
   errorMessage: string;
 

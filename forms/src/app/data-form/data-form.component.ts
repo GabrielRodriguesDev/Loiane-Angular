@@ -22,6 +22,15 @@ export class DataFormComponent implements OnInit {
   technologys: any[];
   newsletterOp: any[];
 
+  numeros: number [] = [1,2,3,4,5]
+  dobro: number [] = []
+  alunos: any [] = [
+    {nome:'joão', idade: 15},
+    {nome:'Pedro', idade: 16},
+    {nome:'Gabriel', idade: 18}
+  ]
+  alunoDeMaior: any
+
   constructor( 
     private formBuilder: FormBuilder,
     private httpClient: HttpClient,
@@ -33,6 +42,17 @@ export class DataFormComponent implements OnInit {
   ngOnInit() {
   
     //this.verificaEmailService.vericaEmail('email1@email.com').subscribe()
+
+    //this.numeros.forEach( data => console.log(data)) // Exemplo forEach percorre o array inteiro)
+    /* this.dobro = this.numeros.map( data => data * 2)// Exemplo map percorre o array mapeando e passando cada valor dentro da condição.
+     console.log(this.dobro) */
+
+    /* this.alunoDeMaior = this.alunos.filter(data => data.idade >= 18)// Exemplo filter percorre o array e retorna  os valores que cooresponde a condição.  
+      console.log(this.alunoDeMaior) */
+
+    /* this.alunoDeMaior = this.alunos.find(data => data.idade == 18) // Exemplo find percorre o array e retorna um unico valor que cooresponde a condição
+      console.log(this.alunoDeMaior) */
+     
 
     this.states = this.dropdownService.getStatesBr();//Usando o Observable com o pipe async, não é necessario fazer inscrição pois o pipe cuida de se inscrever e desinscrever quando necessario
     this.posts = this.dropdownService.getPosts();

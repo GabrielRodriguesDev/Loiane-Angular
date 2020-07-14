@@ -5,13 +5,15 @@ import { FieldControlErrorComponent } from './field-control-error/field-control-
 import { DropdownService } from './services/dropdown.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { QueryCepService } from './services/query-cep.service';
+import { ErrorMessageComponent } from './error-message/error-message.component';
 
 
 
 @NgModule({
   declarations: [
     FormDebugComponent,
-    FieldControlErrorComponent
+    FieldControlErrorComponent,
+    ErrorMessageComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { QueryCepService } from './services/query-cep.service';
 
   exports: [
     FormDebugComponent,
-    FieldControlErrorComponent
+    FieldControlErrorComponent,
+    ErrorMessageComponent
   ],
   providers: [
 
