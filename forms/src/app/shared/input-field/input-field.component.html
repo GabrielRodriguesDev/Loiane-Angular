@@ -1,0 +1,12 @@
+
+<!--Campo input customizado (ControlValueAcessor) Olhar as aulas-->
+<div class="form-group"  [ngClass]="classCss" > 
+      <label [attr.for]="id">{{label}}</label>
+      <input class="form-control" [type]="type" [attr.name]="id" [attr.id]="id" [readOnly]="!!isReadOnly"
+      [(ngModel)]="value"> 
+
+      <app-error-message 
+      [showError]="control"  
+      [errorMessage]="label"> 
+    </app-error-message> 
+</div>

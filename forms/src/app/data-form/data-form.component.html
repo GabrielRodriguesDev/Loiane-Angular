@@ -1,183 +1,179 @@
 
-  <form [formGroup]="form" (ngSubmit)="onSubmit()"> <!-- A ligação entre o FormGroup instanciado no componente eo formulario no template de da pela diretiva FormGroup, onde referenciamos o grupo do formulario.-->
-      <div class="form-group"  [ngClass]="errorStyle('name')" > 
-        <div>
-          <label for="name">Nome</label>
-        </div> 
-        <div >
-          <input type="text" class="form-control"  name="name" 
-          id="name" placeholder="Nome" formControlName="name" > <!-- Para associar cada campo com um controle de grupo usamos a direitva FormControlName onde nela referenciamos o nome do controle de grupo setado no componente.-->
-          <app-error-message 
-          [showError]="!form.get('name').valid && form.controls['name'].touched"  
-          errorMessage="Nome é obrigatório"> <!--Como mostrado podemos fazer a validação no componente ou no template já que fazemos o porperty binding na variavel formgroup, acessamos o valor atraves do "get()", ou "controls" que da acesso ao objeto onde pegamos o dado.-->
-        </app-error-message> <!--Utilizando um componente externo para mostrar o erro.-->
-        </div> 
-      </div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()"> <!-- A ligação entre o FormGroup instanciado no componente eo formulario no template de da pela diretiva FormGroup, onde referenciamos o grupo do formulario.-->
+      
+    
+  <!--Campo input customizado (ControlValueAcessor)-->
+  <app-input-field formControlName="name" 
+    [classCss]="errorStyle('name')"
+    id="name" label="Nome" [control]="!form.get('name').valid && form.controls['name'].touched">
+  </app-input-field>    
+    
   
-      <div class="form-group" [ngClass]="errorStyle('email')" > 
+  <div class="form-group" [ngClass]="errorStyle('email')" > 
         <div >
           <label for="email">Email</label>
         </div>
-        <div >
-          <input type="email" class="form-control was-validated" name="email"
-          id="email" placeholder="name@email.com" formControlName="email">
-          <app-field-control-error 
-          [showError]="checksValidTouched('email')" 
-          errorMessage="Email é obrigatorio">
-        </app-field-control-error>
-      <app-field-control-error 
-        [showError]="checkValidEmail()" 
-        errorMessage="Email invalido">
-      </app-field-control-error>
-      <app-field-control-error 
-      [showError]="form.get('email').status === 'PENDING'" 
-      errorMessage="Validando e-mail"> <!--validações assincronas-->
-    </app-field-control-error>
-    <app-field-control-error 
-    [showError]="form.get('email').hasError('emailInvalido')" 
-    errorMessage="E-mail já cadastrado"> <!--validações assincronas-->
-  </app-field-control-error>
-        </div>
-      </div>
-      
-      
-
-      <div formGroupName="address"> <!--Agrupando dados Ngmodel-->
-        <div class="form-row">
-          <div class="form-group col-md-3" [ngClass]="errorStyle('address.cep')"> <!--Como o dado está dentro do objeto "address temos que acessar de forma diferente o dado, pois o address é um objeto dentro do próprio form. (podemos acessar usando os gets ou controls)-->
-            <label for="cep">CEP</label>
-            <input type="text" class="form-control" id="cep"
-            name="cep" formControlName="cep" (blur)="cep()">
-            <app-field-control-error 
-              [showError]="checksValidTouched('address.cep')" 
-              errorMessage="CEP">
-            </app-field-control-error>
-            <app-field-control-error 
-            [showError]="form.get('address.cep').hasError('cepInvalid')" 
-            errorMessage="CEP">
-          </app-field-control-error>
-          </div>   
-  
-          <div class="form-group col-md-3" [ngClass]="errorStyle('address.number')">
-            <label for="number">Número</label>
-            <input type="text" class="form-control" id="numero"
-            name="number" formControlName="number">
-            <app-field-control-error 
-              [showError]="checksValidTouched('address.number')" 
-              errorMessage="Número">
-            </app-field-control-error> <!--Utilizando um componente externo para mostrar o erro.-->
-          </div>
-  
-          <div class="form-group col-md-6">
-            <label for="complemento">Complemento</label>
-            <input type="text" class="form-control" id="complemento"
-            name="complemento" formControlName="complemento">
-          </div>   
-        </div>
-  
-        <div class="form-group" [ngClass]="errorStyle('address.street')"> <!--Fazendo formatação de erros com CSS usando as  classes de forms do Angular (estados do angular sobre os campos : ng-touched & ng-unthouched - ng-dirty &  ng-pristine....), juntamente com classes do framwork CSS-->
         <div>
-          <label for="rua">Rua</label>
-        </div> 
-            <div >
-              <input type="text" class="form-control"  id="street"  
-              name="street" formControlName="street">
-              <app-field-control-error 
-                [showError]="checksValidTouched('address.street')" 
-                errorMessage="Rua">
-              </app-field-control-error> <!--Utilizando um componente externo para mostrar o erro.-->
-            </div> 
+          <input type="email" class="form-control was-validated" name="email"
+            id="email" placeholder="name@email.com" formControlName="email">
+          <app-field-control-error 
+            [showError]="checksValidTouched('email')" 
+            errorMessage="Email é obrigatorio">
+          </app-field-control-error>
+          <app-field-control-error 
+            [showError]="checkValidEmail()" 
+            errorMessage="Email invalido">
+          </app-field-control-error>
+          <app-field-control-error 
+            [showError]="form.get('email').status === 'PENDING'" 
+            errorMessage="Validando e-mail"> <!--validações assincronas-->
+          </app-field-control-error>
+          <app-field-control-error 
+            [showError]="form.get('email').hasError('emailInvalido')" 
+            errorMessage="E-mail já cadastrado"> <!--validações assincronas-->
+          </app-field-control-error>
         </div>
+  </div>
+      
+  <app-input-field formControlName="address"
+    [classCss]="errorStyle('address')"
+    id="address" label="address" [control]="!form.get('address').valid && form.controls['address'].touched">
+  </app-input-field> 
+
+  <div formGroupName="address"> <!--Agrupando dados Ngmodel-->
+    <div class="form-row">
+      <div class="form-group col-md-3" [ngClass]="errorStyle('address.cep')"> <!--Como o dado está dentro do objeto "address temos que acessar de forma diferente o dado, pois o address é um objeto dentro do próprio form. (podemos acessar usando os gets ou controls-->
+        <label for="cep">CEP</label>
+        <input type="text" class="form-control" id="cep"
+          name="cep" formControlName="cep">
+        <app-field-control-error 
+          [showError]="checksValidTouched('address.cep')" 
+          errorMessage="CEP">
+        </app-field-control-error>
+        <app-field-control-error 
+          [showError]="form.get('address.cep').hasError('cepInvalid')" 
+          errorMessage="CEP">
+        </app-field-control-error>
+      </div >   
   
-        <div class="form-row ">
-          <div class="form-group col-md-5" [ngClass]="errorStyle('address.neighborhood')">
-            <label for="neighborhood">Bairro</label>
-            <input type="text" class="form-control" id="neighborhood"
-            name="neighborhood" formControlName="neighborhood" >
-              <app-field-control-error 
-                [showError]="checksValidTouched('address.neighborhood')" 
-                errorMessage="Bairro">
-              </app-field-control-error> <!--Utilizando um componente externo para mostrar o erro.-->
-          </div>  
+      <div class="form-group col-md-3" [ngClass]="errorStyle('address.number')">
+        <label for="number">Número</label>
+        <input type="text" class="form-control" id="numero"
+          name="number" formControlName="number">
+        <app-field-control-error 
+          [showError]="checksValidTouched('address.number')" 
+          errorMessage="Número">
+        </app-field-control-error> <!--Utilizando um componente externo para mostrar o erro.-->
+      </div>
   
-          <div class="form-group col-md-4" [ngClass]="errorStyle('address.city')">
-            <label for="city">Cidade</label>
-            <input type="text" class="form-control" id="city"
-            name="city"  formControlName="city">
-              <app-field-control-error 
-                [showError]="checksValidTouched('address.city')" 
-                errorMessage="Cidade">
-              </app-field-control-error>  <!--Utilizando um componente externo para mostrar o erro.-->
-          </div>
+      <div class="form-group col-md-6">
+        <label for="complemento">Complemento</label>
+        <input type="text" class="form-control" id="complemento"
+          name="complemento" formControlName="complemento">
+      </div>   
+    </div>
   
-          <div class="form-group col-md-3" [ngClass]="errorStyle('address.state')">
-            <label for="state">Estado</label>
-            <select type="text" class="form-control" id="state"
-              name="state" formControlName="state">
-              <option *ngFor="let state of states | async as list" [value]="state.sigla"> <!--Usando o pipe async para ele poder recuperar os valores do Observale e cuidar das inscrilções e desinscrições-->
-                <!--Linkando a sigla como valor do campo pois quando fazemos a busca pelo CEP oque nós é retornardo é a sigla, portanto já faz a alteração automatica. (Property Binding)-->
-                {{state.nome}}
-              </option>
-            </select>
-            <app-field-control-error 
-              [showError]="checksValidTouched('address.state')" 
-              errorMessage="Estado">
-            </app-field-control-error> <!--Utilizando um componente externo para mostrar o erro.-->
-          </div>
-        </div>
+    <div class="form-group" [ngClass]="errorStyle('address.street')"> <!--Fazendo formatação de erros com CSS usando as  classes de forms do Angular (estados do angular sobre os campos : ng-touched & ng-unthouched - ng-dirty &  ng-pristine....), juntamente com classes do framwork CSS-->
+    <div>
+      <label for="rua">Rua</label>
+    </div> 
+    <div >
+      <input type="text" class="form-control"  id="street"  
+        name="street" formControlName="street">
+      <app-field-control-error 
+        [showError]="checksValidTouched('address.street')" 
+        errorMessage="Rua">
+      </app-field-control-error> <!--Utilizando um componente externo para mostrar o erro.-->
+    </div> 
+    </div>
+  
+    <div class="form-row ">
+      <div class="form-group col-md-5" [ngClass]="errorStyle('address.neighborhood')">
+      <label for="neighborhood">Bairro</label>
+      <input type="text" class="form-control" id="neighborhood"
+      name="neighborhood" formControlName="neighborhood" >
+    <app-field-control-error 
+      [showError]="checksValidTouched('address.neighborhood')" 
+      errorMessage="Bairro">
+    </app-field-control-error> <!--Utilizando um componente externo para mostrar o erro.-->
+      </div>  
+  
+      <div class="form-group col-md-4" [ngClass]="errorStyle('address.city')">
+    <label for="city">Cidade</label>
+    <input type="text" class="form-control" id="city"
+      name="city"  formControlName="city">
+    <app-field-control-error 
+      [showError]="checksValidTouched('address.city')" 
+      errorMessage="Cidade">
+    </app-field-control-error>  <!--Utilizando um componente externo para mostrar o erro.-->
       </div>
-
-      <!--Combox-->
-      <div class="form-group">
-        <label for="posts">Cargo</label>
-        <select type="text" class="form-control" id="posts"
-          name="posts" formControlName="posts" [compareWith]="comparePosts"> <!--Usando o compareWith que compara dois valores e retorna se são iguais ou não. (Para validar o valor do select)-->
-          <option *ngFor="let post of posts" [ngValue]="post"> <!--Usando o ngValue para ter a ligação com o select-->
-            {{post.desc}}
-          </option>
-        </select>
+  
+      <div class="form-group col-md-3" [ngClass]="errorStyle('address.state')">
+    <label for="state">Estado</label>
+    <select type="text" class="form-control" id="state"
+      name="state" formControlName="state">
+        <option *ngFor="let state of states | async as list" [value]="state.sigla"> <!--Usando o pipe async para ele poder recuperar os valores do Observale e cuidar das inscrilções e desinscrições-->
+        <!--Linkando a sigla como valor do campo pois quando fazemos a busca pelo CEP oque nós é retornardo é a sigla, portanto já faz a alteração automatica. (Property Binding)-->
+          {{state.nome}}
+        </option>
+    </select>
+    <app-field-control-error 
+      [showError]="checksValidTouched('address.state')" 
+      errorMessage="Estado">
+    </app-field-control-error> <!--Utilizando um componente externo para mostrar o erro.-->
       </div>
+    </div>
+  </div>
 
-      <!--Combox - Multiple-->
-      <div class="form-group">
-        <label for="technology">Técnologia</label>
-        <select multiple type="text" class="form-control" id="technology"
-          name="technology" formControlName="technologys"> <!--/Trabalhando com o ComboBox multiple-->
-          <option  *ngFor="let technology of technologys" [value]="technology.nome"> <!--/Trabalhando com o ComboBox multiple-->
-            {{technology.desc}}
-          </option>
-        </select>
-      </div>
+  <!--Combox-->
+  <div class="form-group">
+    <label for="posts">Cargo</label>
+    <select type="text" class="form-control" id="posts"
+      name="posts" formControlName="posts" [compareWith]="comparePosts"> <!--Usando o compareWith que compara dois valores e retorna se são iguais ou não. (Para validar o valor do select)-->
+        <option *ngFor="let post of posts" [ngValue]="post"> <!--Usando o ngValue para ter a ligação com o select-->
+          {{post.desc}}
+        </option>
+    </select>
+  </div>
 
-      <!--Radio Button-->
-      <div>
-        <label><strong>NewsLetter</strong></label>
-      </div>
-      <div class="custom-control custom-radio" *ngFor="let item of newsletterOp">
-        <input type="radio" id={{item.desc}} class="custom-control-input" formControlName="newsletter" [value]="item.valor">
-        <label class="custom-control-label" for={{item.desc}}>{{item.desc}}</label>
-      </div>
+  <!--Combox - Multiple-->
+  <div class="form-group">
+    <label for="technology">Técnologia</label>
+    <select multiple type="text" class="form-control" id="technology"
+      name="technology" formControlName="technologys"> <!--/Trabalhando com o ComboBox multiple-->
+        <option  *ngFor="let technology of technologys" [value]="technology.nome"> <!--/Trabalhando com o ComboBox multiple-->
+          {{technology.desc}}
+        </option>
+    </select>
+  </div>
 
-      <br>
+  <!--Radio Button-->
+  <div>
+    <label><strong>NewsLetter</strong></label>
+  </div>
+  <div class="custom-control custom-radio" *ngFor="let item of newsletterOp">
+    <input type="radio" id={{item.desc}} class="custom-control-input" formControlName="newsletter" [value]="item.valor">
+    <label class="custom-control-label" for={{item.desc}}>{{item.desc}}</label>
+  </div>
 
-      <!--Check Box Toggle-->
-      <div>
-        <label><strong>Terms</strong></label>
-      </div>
-      <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="terms" formControlName="terms" 
-        [ngClass]="{'is-invalid': !form.get('terms').valid && form.get('terms').touched }">
-        <label class="custom-control-label" for="terms">I accept the terms</label>
-      </div>
+  <br>
 
-      <br>
+  <!--Check Box Toggle-->
+  <div>
+    <label><strong>Terms</strong></label>
+  </div>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" id="terms" formControlName="terms" 
+      [ngClass]="{'is-invalid': !form.get('terms').valid && form.get('terms').touched }">
+    <label class="custom-control-label" for="terms">I accept the terms</label>
+  </div>
 
-      <button type="submit" class="btn btn-dark">Enviar</button> 
-      <button class="btn btn-dark" (click)="setPosts()">Cargo</button>
-      <button class="btn btn-info" (click)="setTechnology()">Technology</button> 
+  <br>
 
+  <button type="submit" class="btn btn-dark">Enviar</button> 
+  <button class="btn btn-dark" (click)="setPosts()">Cargo</button>
+  <button class="btn btn-info" (click)="setTechnology()">Technology</button> 
 
+  <app-form-debug [form]="form"></app-form-debug>
 
-    <app-form-debug [form]="form"></app-form-debug>
-
-    </form>
+</form>

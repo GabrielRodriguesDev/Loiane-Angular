@@ -6,6 +6,8 @@ import { DropdownService } from './services/dropdown.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { QueryCepService } from './services/query-cep.service';
 import { ErrorMessageComponent } from './error-message/error-message.component';
+import { InputFieldComponent } from './input-field/input-field.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -13,17 +15,20 @@ import { ErrorMessageComponent } from './error-message/error-message.component';
   declarations: [
     FormDebugComponent,
     FieldControlErrorComponent,
-    ErrorMessageComponent
+    ErrorMessageComponent,
+    InputFieldComponent
   ],
   imports: [
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
 
   exports: [
     FormDebugComponent,
     FieldControlErrorComponent,
-    ErrorMessageComponent
+    ErrorMessageComponent,
+    InputFieldComponent
   ],
   providers: [
 

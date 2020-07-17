@@ -3,8 +3,8 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { HttpClient } from '@angular/common/http';
 import { DropdownService } from '../shared/services/dropdown.service'
 import { QueryCepService } from '../shared/services/query-cep.service';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators'
+import { Observable, empty } from 'rxjs';
+import { map, tap, distinctUntilChanged, switchMap } from 'rxjs/operators'
 import { VerificaEmailService } from './services/verifica-email.service';
 
 @Component({
@@ -71,7 +71,7 @@ export class DataFormComponent implements OnInit {
       email: [null, [Validators.required, Validators.email], this.validarEmail.bind(this)], //Validação atráves do Validator (Forma de validação atráves do Reactive Forms), podemos ter mais de um validators, só precisa adicionar as validação dentro do array.    
       confirmEmail: [null],//Aqui teria a validação entre dois campos por uma função que está sendo puxada do FormValidation
       address: this.formBuilder.group({
-        cep: [null, Validators.required], //Aqui teria a validação de campo cep, porém está executando erro. (FormValidation.cepValidator)
+        cep: [null, [Validators.required, Validators.minLength(8)]], //Aqui teria a validação de campo cep, porém está executando erro. (FormValidation.cepValidator)
         number: [null, Validators.required],  
         street: [null, Validators.required],
         complemento: null,
@@ -84,7 +84,22 @@ export class DataFormComponent implements OnInit {
       newsletter: ['s'],//Valor padrão
       terms: [null, Validators.pattern('true')],//Validando uma expressão regular. 
     })
-  }
+
+     this.form.get('address.cep').statusChanges
+      .pipe(
+        distinctUntilChanged(),//Executa apenas quando o valor do statusChange mudar
+        tap(value => console.log('Valor CEP:', value)),
+        switchMap(stauts => status === 'VALID' ? //SwitchMap retorna um subscribe a partir da condição se for verdadeira ou falsa
+        this.queryCep.queryCep(this.form.get('address.cep').value) // Se for verdadeira retorna o BuscaCEP
+        : empty()//Se for falsa retorna vazio
+        )
+      )
+      .subscribe( dados => dados ? this.setValueForm(dados) : {} )//Se inscrevendo no result do Switchmap, pegando o valor retornado se for verdadeiro setando no formulario com o método setValueForm, se for falso retorna objeto em branco
+    
+    /*this.form.get('address.cep').valueChanges
+      .subscribe(value => console.log('Valor CEP:', value))// Podemos usar a reatividade a partir de verificadores on time
+    */
+    }
 
 
 

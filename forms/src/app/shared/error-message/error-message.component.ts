@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-error-message',
@@ -12,9 +13,14 @@ export class ErrorMessageComponent implements OnInit {
   @Input()
   errorMessage: string;
 
+  @Input()
+  control: FormControl
+
   constructor() { }
 
   ngOnInit() {
+
+    
   }
 
 }
