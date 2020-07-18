@@ -6,15 +6,17 @@ import { QueryCepService } from '../shared/services/query-cep.service';
 import { Observable, empty } from 'rxjs';
 import { map, tap, distinctUntilChanged, switchMap } from 'rxjs/operators'
 import { VerificaEmailService } from './services/verifica-email.service';
+import { BaseFormComponent } from '../shared/base-form/base-form.component';
 
 @Component({
   selector: 'app-data-form',
   templateUrl: './data-form.component.html',
   styleUrls: ['./data-form.component.scss']
 })
-export class DataFormComponent implements OnInit {
+export class DataFormComponent extends BaseFormComponent implements OnInit {
 
-  form: FormGroup;
+
+  //form: FormGroup;
   erro: boolean = false
   //states: StatesBr[]
   states: Observable<{}>;
@@ -37,7 +39,9 @@ export class DataFormComponent implements OnInit {
     private queryCep: QueryCepService,
     private dropdownService: DropdownService,
     private verificaEmailService: VerificaEmailService
-    ) { }
+    ) { 
+      super ();
+    }
 
   ngOnInit() {
   
@@ -84,7 +88,6 @@ export class DataFormComponent implements OnInit {
       newsletter: ['s'],//Valor padrão
       terms: [null, Validators.pattern('true')],//Validando uma expressão regular. 
     })
-
      this.form.get('address.cep').statusChanges
       .pipe(
         distinctUntilChanged(),//Executa apenas quando o valor do statusChange mudar
@@ -94,66 +97,27 @@ export class DataFormComponent implements OnInit {
         : empty()//Se for falsa retorna vazio
         )
       )
-      .subscribe( dados => dados ? this.setValueForm(dados) : {} )//Se inscrevendo no result do Switchmap, pegando o valor retornado se for verdadeiro setando no formulario com o método setValueForm, se for falso retorna objeto em branco
+      .subscribe( dados => { dados ? this.setValueForm(dados) : {} },//Se inscrevendo no result do Switchmap, pegando o valor retornado se for verdadeiro setando no formulario com o método setValueForm, se for falso retorna objeto em branco
+      (error: Error) => console.log('Não achou CEP nenhum brow'))
     
     /*this.form.get('address.cep').valueChanges
       .subscribe(value => console.log('Valor CEP:', value))// Podemos usar a reatividade a partir de verificadores on time
     */
     }
 
-
-
   //Form Submit
-  onSubmit(){
-    if(this.form.valid){
-      this.httpClient.post('https://httpbin.org/post', JSON.stringify(this.form.value))//Transformando o valo passando em JSON. 
-      .subscribe(data => { //Se inscrevendo no POST, e quando obter um "REPONSE" fazer um console log com oq foi retornado 
-        //Reset Form se não houver erro.
-        if(!this.erro){
-          this.resetForm()
-        }
-      },
-      (error: Error)=> {//Recebendo o erro e usado para a logica do IF acima.
-        this.erro = true;
-        alert("Erro ao enviar fórmulario")
-      });
-    } else { //Caso o form não seja valido, troca os campos para touched e aplica o stylo de erro que é acionado quando o campo é touched
-      this.checkFormValidation(this.form)//Passando o proprio form para analisar o objeto
-    }
-  }
-
-  //Valid Form
-  checkFormValidation(form: FormGroup){
-    Object.keys(form.controls).forEach(key => {// Object key retorna os key values de cada objeto. 
-      console.log(key)// Será retornado os values key do objeto form (Os values keys aninhados (valores do endereco) não vão ser retornado por essa function)
-      const control = form.get(key);//Pegando o value key do formulario
-      control.markAsTouched();//Aplicando a classe de touched para a mudança de estilo
-      if(control instanceof FormGroup) { //Verificando se alguma value key é um FormGroup (Um objeto aninhado)
-        this.checkFormValidation(control) //Caso seja passa sobre a validação, pois o Object key não pega aninhados, portanto é necessario fazer uma "apropriação"
+  submit() {
+    this.httpClient.post('https://httpbin.org/post', JSON.stringify(this.form.value))//Transformando o valo passando em JSON. 
+    .subscribe(data => { //Se inscrevendo no POST, e quando obter um "REPONSE" fazer um console log com oq foi retornado 
+      //Reset Form se não houver erro.
+      if(!this.erro){
+        this.resetForm()
       }
+    },
+    (error: Error)=> {//Recebendo o erro e usado para a logica do IF acima.
+      this.erro = true;
+      alert("Erro ao enviar fórmulario")
     });
-  }
-
-  resetForm(){
-    this.form.reset()
-  }
-
-  //Formatting CSS
-  checkValidEmail(){
-    let fieldEmail = this.form.get('email')
-    if(fieldEmail.errors){
-      return fieldEmail.errors['email'] && fieldEmail.touched
-    }
-  }
-
-  checksValidTouched(field){
-    return !this.form.get(field).valid && this.form.get(field).touched // Verifica se o campo do válido de acordo com a condição passada; (Reactive forms já temos os dados no componente por isso é diferente do template drive)
-  }
-
-  errorStyle(field){
-    return {
-      'was-validated': this.form.get(field).valid && this.form.get(field).touched
-    }   
   }
 
   //Query CEP
@@ -168,7 +132,6 @@ export class DataFormComponent implements OnInit {
       alert('CEP invalid')
     }
   }
-
 
   setValueForm(data){
     this.form.patchValue({//Usamos o patchValue() quando queremos alterar uma séria de valores (Varios campos), desde que esteja no form associado. 
