@@ -15,10 +15,9 @@ export class CursosListaComponent implements OnInit {
   constructor(
     private cursosService : CursosService
   ) { }
-
+  
   ngOnInit() {
     this.cursosService.list()
       .subscribe(data => this.cursos = data)
   }
-
 }
