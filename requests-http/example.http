@@ -1,5 +1,8 @@
 //Example de protocol HTTP com o plugin Rest Client 
 
+
+json-server --watch db.json
+
 http://localhost:3000/cursos
 
 
