@@ -16,7 +16,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    ModalModule
+    ModalModule.forRoot()//Colocamos o forRoot para que todas as instancias necessárias sejam usadas
   ],
   providers: [],
   bootstrap: [AppComponent]
