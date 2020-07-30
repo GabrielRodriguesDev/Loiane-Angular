@@ -18,29 +18,34 @@ export class AlertModalService {
 
   constructor(private modalService: BsModalService) { }
 
-  showAlert(message: string, type: Alertypes){
-    const bsModalRef: BsModalRef = this.modalService.show(AlertModalComponent);//Iniciando o modal com base em um component (O componente tem que estar habito a ser usado)
-    bsModalRef.content.type = type;//"content" é a propriedade por onde passamos informações "InputProperty"
+  showAlert(message: string, type: Alertypes, dismissTimeout?: number) {
+    const bsModalRef: BsModalRef = this.modalService.show(AlertModalComponent); /* Iniciando o modal com base em um component
+    (O componente tem que estar habito a ser usado) */
+    bsModalRef.content.type = type; // "content" é a propriedade por onde passamos informações "InputProperty"
     bsModalRef.content.message = message;
+
+    if (dismissTimeout) {
+      setTimeout(() => bsModalRef.hide(), dismissTimeout);
+    }
   }
 
-  showAlertDanger(message: string){
-    this.showAlert(message, Alertypes.DANGER)
+  showAlertDanger(message: string) {
+    this.showAlert(message, Alertypes.DANGER);
   }
 
   showAlertSuccess(message: string){
-    this.showAlert(message, Alertypes.SUCCESS)
+    this.showAlert(message, Alertypes.SUCCESS, 3000);
   }
 
   showAlertWarning(message: string){
-    this.showAlert(message, Alertypes.WARNING)
+    this.showAlert(message, Alertypes.WARNING);
   }
 
   showAlertInfo(message: string){
-    this.showAlert(message, Alertypes.INFO)
+    this.showAlert(message, Alertypes.INFO);
   }
 
   showAlertDark(message: string){
-    this.showAlert(message, Alertypes.DARK)
+    this.showAlert(message, Alertypes.DARK);
   }
 }
