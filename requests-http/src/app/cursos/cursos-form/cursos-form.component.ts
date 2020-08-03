@@ -42,19 +42,22 @@ export class CursosFormComponent implements OnInit {
       }
     )*/ // Editar versão 1 (Foi refatorado)
 
-      this.activatedRoute.params
+      /*this.activatedRoute.params
         .pipe(
           map((params: any) => params['id']),
           switchMap(id => this.cursoService.loadByID(id))// switchMap Cancela calores antigos e mantem apenas o mais recente e podemos fazer mais aninhamento de Swich,
           // para obter mais valoes ao invés de ficar fazendo varios Subscribe
         ).subscribe(
           (curso) => this.uptadeForm(curso)
-        ); // Editar versão 2 (Já refatorado)
+        ); // Editar versão 2 (Foi refeito com um guarda de rota para melhorar na performace) */
 
+    const curso = this.activatedRoute.snapshot.data['curso']// Componente já é iniciado com os dados do objeto, pois o guard (Resolve) fez todo o load antes na inicialização
+
+    
 
     this.form = this.fb.group({
-      id: [null],
-      nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(250)]]
+      id: [curso.id], // Populamos os dados com o objeto que foi carregado pelo guard Resolver
+      nome: [curso.nome, [Validators.required, Validators.minLength(3), Validators.maxLength(250)]]
     });
   }
 
