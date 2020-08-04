@@ -7,8 +7,6 @@ import { ActivatedRoute } from '@angular/router';
 
 import { map, switchMap } from 'rxjs/operators';
 
-
-
 @Component({
   selector: 'app-cursos-form',
   templateUrl: './cursos-form.component.html',
@@ -70,15 +68,43 @@ export class CursosFormComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+
+    //Manipulando a msg de Error para condições diferentes.
+    let msgSucess = 'Curso criado com sucesso.';
+    let msgError = 'Erro ao criar curso, tente novamente!';
+    if(this.form.value.id) {
+      msgSucess = 'Curso alterado com sucesso.';
+      msgError = 'Erro ao alterar curso, tente novamente!'
+    }
     if (this.form.valid) {
-      this.cursoService.create(this.form.value).subscribe(
+      this.cursoService.save(this.form.value).subscribe(
         success => {
-          this.modal.showAlertSuccess('Curso criado com sucesso.'); // Usando o ModalAlert Generico que foi criado.
+          this.modal.showAlertSuccess(msgSucess); // Usando o ModalAlert Generico que foi criado.
           this.location.back(); // Seta a rota anterior.
          },
-        error => this.modal.showAlertDanger('Erro ao criar curso, tente novamente!'),
-        () => this.modal.showAlertSuccess('Curso criado com sucesso.')
-      );
+        error => this.modal.showAlertDanger(msgError),
+      ) // onSubmit (v2)
+/*
+      if(this.form.value.id) {
+        this.cursoService.update(this.form.value).subscribe(
+          success => {
+            this.modal.showAlertSuccess('Curso alterado com sucesso.'); // Usando o ModalAlert Generico que foi criado.
+            this.location.back(); // Seta a rota anterior.
+           },
+          error => this.modal.showAlertDanger('Erro ao alterar curso, tente novamente!'),
+          () => console.log('Upate completo')
+        )
+      } else {
+        this.cursoService.create(this.form.value).subscribe(
+          success => {
+            this.modal.showAlertSuccess('Curso criado com sucesso.'); // Usando o ModalAlert Generico que foi criado.
+            this.location.back(); // Seta a rota anterior.
+           },
+          error => this.modal.showAlertDanger('Erro ao criar curso, tente novamente!'),
+          () => console.log('Criação completa')
+        );
+      }
+  */ //Refatorado onSubmit e msg de erros (v1)   
     }
   }
 

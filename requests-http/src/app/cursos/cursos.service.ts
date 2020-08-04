@@ -27,7 +27,19 @@ export class CursosService {
     return this.http.get<Curso>(`${this.API}/${id}`).pipe(take(1));
   }
 
-  create(curso) {
-    return this.http.post(this.API, curso).pipe(take(1))
+  private create(curso) {
+    return this.http.post(this.API, curso).pipe(take(1));
+  }
+
+  private update(curso) {
+    return this.http.put(`${this.API}/${curso.id}`, curso).pipe(take(1));
+  }
+
+  save(curso) {//Recebendo o objeto de curso se já existir ID atualizar caso não tenha faça a criação.
+    if(curso.id) {
+      return this.update(curso)
+    } else {
+      return this.create(curso)
+    }
   }
 }
