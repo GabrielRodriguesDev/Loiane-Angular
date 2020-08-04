@@ -28,11 +28,11 @@ export class CursosService {
   }
 
   private create(curso) {
-    return this.http.post(this.API, curso).pipe(take(1));
+    return this.http.post(this.API, curso).pipe(take(1)); // Método de create;
   }
 
   private update(curso) {
-    return this.http.put(`${this.API}/${curso.id}`, curso).pipe(take(1));
+    return this.http.put(`${this.API}/${curso.id}`, curso).pipe(take(1)); // Método de update 
   }
 
   save(curso) {//Recebendo o objeto de curso se já existir ID atualizar caso não tenha faça a criação.
@@ -41,5 +41,9 @@ export class CursosService {
     } else {
       return this.create(curso)
     }
+  }
+
+  remove(id) {
+    return this.http.delete(`${this.API}/${id}`).pipe(take(1)); // Método de delete;
   }
 }

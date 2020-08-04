@@ -19,7 +19,7 @@ export class CursosFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private cursoService: CursosService,
-    private modal: AlertModalService,
+    private alertModalService: AlertModalService,
     private location: Location,
     private activatedRoute: ActivatedRoute
   ) { }
@@ -79,28 +79,28 @@ export class CursosFormComponent implements OnInit {
     if (this.form.valid) {
       this.cursoService.save(this.form.value).subscribe(
         success => {
-          this.modal.showAlertSuccess(msgSucess); // Usando o ModalAlert Generico que foi criado.
+          this.alertModalService.showAlertSuccess(msgSucess); // Usando o ModalAlert Generico que foi criado.
           this.location.back(); // Seta a rota anterior.
          },
-        error => this.modal.showAlertDanger(msgError),
+        error => this.alertModalService.showAlertDanger(msgError),
       ) // onSubmit (v2)
 /*
       if(this.form.value.id) {
         this.cursoService.update(this.form.value).subscribe(
           success => {
-            this.modal.showAlertSuccess('Curso alterado com sucesso.'); // Usando o ModalAlert Generico que foi criado.
+            this.alertModalService.showAlertSuccess('Curso alterado com sucesso.'); // Usando o ModalAlert Generico que foi criado.
             this.location.back(); // Seta a rota anterior.
            },
-          error => this.modal.showAlertDanger('Erro ao alterar curso, tente novamente!'),
+          error => this.alertModalService.showAlertDanger('Erro ao alterar curso, tente novamente!'),
           () => console.log('Upate completo')
         )
       } else {
         this.cursoService.create(this.form.value).subscribe(
           success => {
-            this.modal.showAlertSuccess('Curso criado com sucesso.'); // Usando o ModalAlert Generico que foi criado.
+            this.alertModalService.showAlertSuccess('Curso criado com sucesso.'); // Usando o ModalAlert Generico que foi criado.
             this.location.back(); // Seta a rota anterior.
            },
-          error => this.modal.showAlertDanger('Erro ao criar curso, tente novamente!'),
+          error => this.alertModalService.showAlertDanger('Erro ao criar curso, tente novamente!'),
           () => console.log('Criação completa')
         );
       }
