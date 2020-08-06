@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Resolve } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Curso } from 'src/app/models/curso';
-import { CursosService } from '../cursos.service';
+import { CursoService } from '../cursos.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { CursosService } from '../cursos.service';
 export class CursoResolverGuard implements Resolve<Curso> {
 
   constructor(
-    private cursosService  : CursosService
+    private cursosService  : CursoService
   ) {}
   
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Curso | Observable<Curso> | Promise<Curso> {

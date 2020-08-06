@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CursosService } from '../cursos.service';
 import { Curso } from 'src/app/models/curso';
 import { Observable, Subject, empty, from, EMPTY } from 'rxjs';
 
@@ -8,6 +7,7 @@ import { catchError, take, switchMap } from 'rxjs/operators';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { CursoService } from '../cursos.service';
 
 
 
@@ -30,7 +30,7 @@ export class CursosListaComponent implements OnInit {
   deleteModalRef: BsModalRef;
 
   constructor(
-    private cursosService: CursosService,
+    private cursosService: CursoService,
     private modalService: BsModalService,
     private alertModalService: AlertModalService,
     private router: Router,
@@ -87,7 +87,7 @@ export class CursosListaComponent implements OnInit {
       success => { this.onRefresh(); // Em caso de sucess recarrega a list
       this.deleteModalRef.hide(); // Logo após fecha o modal
       },
-      error => this.alertModalService.showAlertDanger('Erro ao remover curso. Tente novamente mais tarde.')
+      error =>  this.alertModalService.showAlertDanger('Erro ao remover curso. Tente novamente mais tarde.')
    )
   }
 
