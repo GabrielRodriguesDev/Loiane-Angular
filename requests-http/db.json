@@ -1,10 +1,6 @@
 {
   "cursos": [
     {
-      "id": 1,
-      "nome": "Angular"
-    },
-    {
       "nome": "Java",
       "id": 2
     },
@@ -19,6 +15,10 @@
     {
       "nome": "Vue.js",
       "id": 5
+    },
+    {
+      "id": 6,
+      "nome": "Angular"
     }
   ]
 }

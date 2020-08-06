@@ -1,14 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CursosService } from '../cursos.service';
 import { Curso } from 'src/app/models/curso';
-import { Observable, Subject, empty } from 'rxjs';
+import { Observable, Subject, empty, from, EMPTY } from 'rxjs';
 
-import { catchError } from 'rxjs/operators';
+import { catchError, take, switchMap } from 'rxjs/operators';
 
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { SubjectSubscriber } from 'rxjs/internal/Subject';
 
 
 
@@ -78,18 +77,20 @@ export class CursosListaComponent implements OnInit {
   }
 
   onDelete(curso) {// Método que abre a Modal para confirmação
-    this.selectedCourse = curso
-    this.deleteModalRef = this.modalService.show(this.deleteModal, {class: 'modal-sm'}) // Usando o ViewChild para passar o parametro (Parametro que é o template)
-  }
-
-  onCofirmDelte() { // Método de confirmação do delete 
-    this.cursosService.remove(this.selectedCourse.id).subscribe( // Acessando o método delete do service passando o curso.id que foi recuperado no momento que foi aberto a modal pelo método onDelete()
+    this.selectedCourse = curso;
+    //this.deleteModalRef = this.modalService.show(this.deleteModal, {class: 'modal-sm'}) // Usando o ViewChild para passar o parametro (Parametro que é o template)
+   const result$ = this.alertModalService.showConfirm('Confirmação', 'Tem certeza que deseja remover esse curso?', 'Cancelar', 'Salvar')// Passando os parametros necessários para a Modal
+    result$.asObservable().pipe(
+      take(1),
+      switchMap(result =>  result ? this.cursosService.remove(curso.id) : EMPTY) // Caso o valor do Subject do Modal seja true executa a função que deleta o item com base no id, caso não seje retorne vazio (EMPTY)
+   ).subscribe( // Retorno no subscribe e verificando se houve erro ao deletar o registro, pois quando retornamos "EMPTY" o Angular entende que não deve cair na cadeia do Subscribe
       success => { this.onRefresh(); // Em caso de sucess recarrega a list
       this.deleteModalRef.hide(); // Logo após fecha o modal
       },
       error => this.alertModalService.showAlertDanger('Erro ao remover curso. Tente novamente mais tarde.')
-    )
+   )
   }
+
 
   onDeclineDelte() {
     this.deleteModalRef.hide();

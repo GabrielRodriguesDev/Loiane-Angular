@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { AlertModalComponent } from './alert-modal/alert-modal.component';
+import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 
 enum Alertypes {
   DANGER = 'danger',
@@ -47,5 +48,15 @@ export class AlertModalService {
 
   showAlertDark(message: string){
     this.showAlert(message, Alertypes.DARK);
+  }
+
+  showConfirm(title: string, message: string, rightButton: string, leftButton: string) {//Chamando o método que passa o parametros necessários e inicia a modal
+    const bsModalRef : BsModalRef = this.modalService.show(ConfirmModalComponent);
+    bsModalRef.content.title = title; // Acessando todas as variaveis globais do ConfirmModal... Neste caso as @Input para setar algum valor necessário.
+    bsModalRef.content.message = message; 
+    bsModalRef.content.rightButton = rightButton;
+    bsModalRef.content.leftButton = leftButton;
+
+    return (<ConfirmModalComponent> bsModalRef.content).confirmResult; // Tipando o retorno para pegar o intelissense, e agora sabemos que o confirmResult retorna um observable.
   }
 }
