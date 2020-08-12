@@ -39,7 +39,7 @@ export class UploadFileComponent implements OnInit {
 
   onUpload() {
     if(this.files && this.files.size > 0) { // Verficando se o valor existe
-      this.uploadFileService.upload(this.files, 'http://localhost:8000/upload') // Chamando o serviço e passando os parametros necessários.
+      this.uploadFileService.upload(this.files, '/api/upload') // Chamando o serviço e passando os parametros necessários.
       .subscribe(reponse => console.log('Upload Concluido'))// Pegando a repose e criando um console.
     } // Nesse caso é necessário fazer ums unsubscribe.
   }
