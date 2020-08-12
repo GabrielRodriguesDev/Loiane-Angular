@@ -23,6 +23,9 @@ export class UploadFileService {
     //return this.httpClient.request(request);
         
         // Exemplo com o HttpClient
-      return this.httpClient.post(url, formData) // Retornando um post sobre os parametros para quem chamou o método
+      return this.httpClient.post(url, formData,{ // Retornando um post sobre os parametros para quem chamou o método
+        observe: 'events', // Captura os eventos
+         reportProgress: true // Reporta o progresso -> Mostrando o quanto foi carregado e o total
+      }) 
   }
 }
