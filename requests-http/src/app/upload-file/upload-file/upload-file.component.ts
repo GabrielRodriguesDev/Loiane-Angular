@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UploadFileService } from '../upload-file.service';
-import { HttpEventType, HttpEvent } from '@angular/common/http';
+import { environment1 } from '../../../environments/environment';
+import { uploadProgress, filterReponse } from '../../shared/rxjs-operators';
 
 @Component({
   selector: 'app-upload-file',
@@ -9,58 +10,53 @@ import { HttpEventType, HttpEvent } from '@angular/common/http';
 })
 export class UploadFileComponent implements OnInit {
 
-  files: Set<File>; // A estrutua de dados 'Set' já cuida dos arquivos não deixando importar mais de um do mesmo.
-  progress: number;
+  files: Set<File>;
+  progress = 0;
 
-  constructor(
-    private uploadFileService: UploadFileService
-  ) { }
+  constructor(private service: UploadFileService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit() { }
 
-  onChange(event){
+  onChange(event) {
+    console.log(event);
 
-    const selectFiles =  <FileList>event.srcElement.files;// Passando as informações do arquivo para a constante.
-    
-    //Lindando com um arq só
-    //document.getElementById('customFileLabel').innerHTML = selectFiles[0].name; // Js puro, setando o nome do arquivo no campo de label.
-    
-    //Lindando com mutiplos arq
-    const filesName = []; // Criando const de array vazia
-    
-    this.files = new Set(); // Instanciado a estrutura de dados Set na variavel 
-    
-    for(let i = 0; i<selectFiles.length; i++){ // Fazendo um laço que percorre para cada nome de arq existente
-      filesName.push(selectFiles[i].name); // A cada arq existente, empurra no filesName Array.
-      this.files.add(selectFiles[i]);
+    const selectedFiles = <FileList>event.srcElement.files;
+    // document.getElementById('customFileLabel').innerHTML = selectedFiles[0].name;
+
+    const fileNames = [];
+    this.files = new Set();
+    for (let i = 0; i < selectedFiles.length; i++) {
+      fileNames.push(selectedFiles[i].name);
+      this.files.add(selectedFiles[i]);
     }
-    document.getElementById('customFileLabel').innerHTML = filesName.join(', '); /* Depois de popular todo o filesName,
-    (Js puro) seto no campo da label os registros do array filesName fazendo um join (juntando) todos separando com virgula e espaço*/
-    this.progress = 0
+    document.getElementById('customFileLabel').innerHTML = fileNames.join(', ');
+
+    this.progress = 0;
   }
 
   onUpload() {
-    if(this.files && this.files.size > 0) { // Verficando se o valor existe
-      this.uploadFileService.upload(this.files, '/api/upload') // Chamando o serviço e passando os parametros necessários.
-      .subscribe((event: HttpEvent<Object>) => { // Recebendo algo do tipo HttpEvent
-        // HttpEventType // É um enumerdaor que mostra o retorno do evento acessando a classe conseguimos ver seu número e descrição 
-        
-        if(event.type == HttpEventType.Response) {
-          console.log('Upload Concluido')
-          this.progress = null
-
-        } else 
-
-        if (event.type == HttpEventType.UploadProgress) {
-          const percetDone = Math.round((event.loaded * 100) / event.total);
-          console.log('Progresso', percetDone);
-          this.progress = percetDone;
-        }
-        console.log(event) // Verificando oque está sendo retornardo
-      
-      })
-    } // Nesse caso é necessário fazer ums unsubscribe.
+    if (this.files && this.files.size > 0) {
+      this.service.upload(this.files, environment1.BASE_URL + '/upload')
+        .pipe(
+          uploadProgress(progress => {
+            console.log(progress);
+            this.progress = progress;
+          }),
+          filterReponse()
+        )
+        .subscribe(response => { console.log('Upload Concluído')
+          this.progress = 0
+    });
+        // .subscribe((event: HttpEvent<Object>) => {
+        //   // console.log(event);
+        //   if (event.type === HttpEventType.Response) {
+        //     console.log('Upload Concluído');
+        //   } else if (event.type === HttpEventType.UploadProgress) {
+        //     const percentDone = Math.round((event.loaded * 100) / event.total);
+        //     // console.log('Progresso', percentDone);
+        //     this.progress = percentDone;
+        //   }
+        // } );
+    }
   }
-
 }

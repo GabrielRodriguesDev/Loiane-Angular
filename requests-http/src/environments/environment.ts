@@ -8,6 +8,12 @@ export const environment = {
 
 };
 
+export const environment1 = {
+  production: false,
+  API: 'http://localhost:8000/',
+  BASE_URL: '/api'
+};
+
 
 /*
  * For easier debugging in development mode, you can import the following file
