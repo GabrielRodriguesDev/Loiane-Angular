@@ -7,6 +7,7 @@ import { uploadProgress, filterReponse } from '../../shared/rxjs-operators';
   selector: 'app-upload-file',
   templateUrl: './upload-file.component.html',
   styleUrls: ['./upload-file.component.scss']
+
 })
 export class UploadFileComponent implements OnInit {
 
@@ -58,5 +59,18 @@ export class UploadFileComponent implements OnInit {
         //   }
         // } );
     }
+  }
+  onDownloadExcel() {
+    this.service.download(environment1.BASE_URL + '/downloadExcel')
+    .subscribe((resp: any) => {
+     this.service.handleFile(resp, 'Teste.xlsx')
+    })
+  }
+
+  onDownloadPDF() {
+    this.service.download(environment1.BASE_URL + '/downloadPDF') // Fazendo o Get do endpoint correto (servidor)
+    .subscribe((resp: any) => { // Chamando o método JSPURO com base do get no endpoint faz o download do Blob retornado no get
+      this.service.handleFile(resp, 'Teste.PDF') // Passando os parametros o primeiro o resp do get que seria o Blob (arq), e o nome do arq
+    })
   }
 }
