@@ -30,9 +30,9 @@ export class UploadFileService {
   }
 
 
-  download(url: string) {
-    return this.httpClient.get(url, {
-      responseType: 'blob' as 'json'
+  download(url: string) { // Métodp recebe alguma url
+    return this.httpClient.get(url, { // Usa o HttpClient faz um get no endpoint passado por parametro
+      responseType: 'blob' as 'json' // Seta que a resposta desse endpoint tende a ser um blob ou json
     })
   }
 

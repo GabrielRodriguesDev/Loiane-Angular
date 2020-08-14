@@ -22,12 +22,12 @@ app.post('/upload', multipartMiddleware, (req, res) => {
   res.json({ message: files });
 });
 
-app.get('/downloadExcel', (req, resp) => {
-  resp.download('./uploads/Teste.xlsx')
+app.get('/downloadExcel', (req, resp) => { // Método de get setando o endpoint para efetuar o dowload
+  resp.download('./uploads/Teste.xlsx') // Repondendo o arquivo para download
 })
 
-app.get('/downloadPDF', (req, resp) => {
-  resp.download('./uploads/Teste.pdf')
+app.get('/downloadPDF', (req, resp) => { // Método de get setando o endpoint para efetuar o dowload
+  resp.download('./uploads/Teste.pdf') // Repondendo o arquivo para download
 })
 
 app.use((err, req, res, next) => res.json({error: err.message}));
