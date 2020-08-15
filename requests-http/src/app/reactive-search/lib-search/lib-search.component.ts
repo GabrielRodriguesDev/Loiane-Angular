@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { HttpClientModule, HttpClient, HttpParams } from '@angular/common/http';
-import { tap, map } from 'rxjs/operators';
+import { tap, map, filter, distinctUntilChanged, debounceTime, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-lib-search',
@@ -15,12 +15,33 @@ export class LibSearchComponent implements OnInit {
   SEARCH_URL = 'https://api.cdnjs.com/libraries';
   results$: Observable<any>;
   total: number;
+  params = new HttpParams(); // Passando parametros a URL através do HttpParams (Mais usado para paramtros dinamicos)
+  FIELDS = 'name,version'
+      
 
   constructor(
     private httpClient : HttpClient
   ) { }
 
   ngOnInit() {
+
+
+    this.results$ = this.queryFields.valueChanges // Retornando um Observable de cada mudança que acontece no campo..
+      .pipe(
+      map(value => value.trim()), // Retirando os "Espaços do value"
+      filter(value => value.length > 1), // Recuperando valores com o tamanho maior que 1
+      debounceTime(200), // Colocando um delay de 200 milessegundos, para não fazer uma requisição a cada letra digitada
+      distinctUntilChanged(), // Recuperando o valor diferente (Recupera apenas o valor diferente de antes, ou seja não repete o valor)
+      //tap( value => console.log(value)) // Usado para Debbug
+      switchMap( value => this.httpClient.get(this.SEARCH_URL, { // Fazendo um SwitchMap, pois ele cancela a busca anterior, a partir disso fazendo uma requisição get, passando o objeto de parametros necessários
+        params : {
+          search : value,
+          fields : this.FIELDS
+        }
+      })),
+      tap((resp : any) => this.total = resp.total), // Atribuindo o total de registros encontrados
+      map((resp: any) =>  resp.results ) // Retornando os registros a variavel que irá gerenciar e se desiscever pois está com o pipe async
+      )
   }
 
   onSearch() {
