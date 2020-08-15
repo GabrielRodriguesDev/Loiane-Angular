@@ -1,0 +1,56 @@
+<div style="margin-top: 10px;">
+  <div class="custom-file">
+    <input
+      type="file"
+      class="custom-file-input"
+      id="customFile"
+      multiple
+      (change)="onChange($event)"
+      style="text-overflow: ellipsis"
+      
+    />
+    <label class="custom-file-label" for="customFile" id="customFileLabel" 
+
+      >Selecionar Arquivo</label
+    >
+  </div>
+</div>
+<div class="progress prg" *ngIf="progress">
+  <div
+    class="progress-bar"
+    role="progressbar"
+    [style.width] = "progress + '%'"
+  >
+    {{progress}}%
+  </div>
+</div>
+<div style="margin-top: 10px;" *ngIf="!progress" >
+  <button
+    class="btn btn-primary"
+    type="button"
+    (click)="onUpload()"
+    [disabled]="!files"
+  >
+    Upload
+  </button>
+</div>
+<div style="margin-top: 10px;" *ngIf="!progress" >
+  <button
+    class="btn btn-primary"
+    type="button"
+    (click)="onDownloadExcel()"
+  >
+
+  Download Excel
+  
+  </button>
+  <button
+    class="btn btn-primary"
+    type="button"
+    (click)="onDownloadPDF()"
+  >
+    Download PDF
+
+  </button>
+
+</div>

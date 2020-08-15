@@ -9,6 +9,7 @@ import { MeuFormModule } from './meu-form/meu-form.module';
 import { InputPropertyComponent } from './input-property/input-property.component';
 import { OutputPropertyComponent } from './output-property/output-property.component';
 import { CycleComponent } from './cycle/cycle.component';
+import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { CycleComponent } from './cycle/cycle.component';
     DataBindingComponent,
     InputPropertyComponent,
     OutputPropertyComponent,
-    CycleComponent
+    CycleComponent,
+    ConfirmModalComponent
   ],
   imports: [
     BrowserModule,
